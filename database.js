@@ -39,10 +39,14 @@ const toolsDB = [
     // =========================================
     // CATEGORY 1: IMAGE RESIZE (Traffic Pillar)
     // =========================================
-    // Add your tools here...
-    // Example: { "name": "SSC Photo Resizer", "url": "resize-image-20kb-ssc", "cat": "image-resize", "icon": "fa-image", "desc": "Resize to 20KB for SSC Exams.", "tag": "SSC" },
-
-
+   { 
+        "name": "Resize to 20KB (SSC)", 
+        "url": "resize-image-20kb-for-ssc-form", 
+        "cat": "image-resize", 
+        "icon": "fa-id-badge", 
+        "desc": "Resize photo to 20KB for SSC CGL/CHSL forms.", 
+        "tag": "SSC" 
+    },
     // =========================================
     // CATEGORY 2: SIGNATURE RESIZE (High Intent)
     // =========================================
