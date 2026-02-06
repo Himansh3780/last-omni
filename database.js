@@ -71,6 +71,14 @@ const toolsDB = [
         "desc": "Resize photo to 350x350px (Square) for UPSC Civil Services.", 
         "tag": "UPSC" 
     },
+    { 
+        "name": "Resize to 50KB (UPSC)", 
+        "url": "resize-image-50kb-for-upsc-form", 
+        "cat": "image-resize", 
+        "icon": "fa-user-check", 
+        "desc": "Resize photo to 50KB (Square 350px) for UPSC exams.", 
+        "tag": "UPSC" 
+    },
     // =========================================
     // CATEGORY 2: SIGNATURE RESIZE (High Intent)
     // =========================================
