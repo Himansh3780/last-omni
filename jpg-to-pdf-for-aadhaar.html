@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="canonical" href="https://omnitools.in/jpg-to-pdf-for-aadhaar.html">
+
+    <title>JPG to PDF for Aadhaar Upload (Combine Front & Back Photos) - Free</title>
+    
+    <meta name="description" content="Convert JPG images to PDF for Aadhaar card update. Combine Front and Back photos of Voter ID/DL/Passport into one single PDF under 2MB. Secure & Online.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [{
+        "@type": "Question",
+        "name": "How to combine front and back photos for Aadhaar upload?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Select both the front and back photos of your document in this tool. It will merge them into a single PDF file which is required for the UIDAI portal."
+        }
+      },{
+        "@type": "Question",
+        "name": "What is the maximum file size for Aadhaar PDF?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The maximum allowed file size for document upload on the myAadhaar portal is 2 MB. This tool automatically ensures your PDF stays within this limit."
+        }
+      },{
+        "@type": "Question",
+        "name": "Is it safe to upload my ID proofs here?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. This tool works entirely in your browser (Client-Side). Your photos and the generated PDF are processed locally and never sent to any server."
+        }
+      }]
+    }
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <style>
+        /* --- GOLD / ZINC THEME --- */
+        :root { 
+            --bg-body: #09090b; --bg-card: #0c0c0e; --primary: #f59e0b; 
+            --text-main: #ededef; --text-muted: #a1a1aa; --border: #1f1f22;
+        }
+        * { box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        
+        body { 
+            background: var(--bg-body); color: var(--text-main); margin: 0; padding: 20px; 
+            min-height: 100vh; display: flex; flex-direction: column; align-items: center;
+            background-image: linear-gradient(#1f1f22 1px, transparent 1px), linear-gradient(90deg, #1f1f22 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        .container { max-width: 700px; width: 100%; }
+        
+        .nav-link { color: var(--text-muted); text-decoration: none; display: flex; align-items: center; gap: 8px; margin-bottom: 20px; font-size: 0.9rem; transition:0.2s; }
+        .nav-link:hover { color: var(--primary); }
+
+        h1 { font-size: 1.8rem; margin: 0 0 10px 0; color: var(--text-main); font-weight: 800; letter-spacing: -0.02em; }
+        h2 { font-size: 1.3rem; margin: 40px 0 15px 0; color: var(--text-main); font-weight: 700; border-left: 4px solid var(--primary); padding-left: 15px; }
+        p, li { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 10px; }
+        ul { padding-left: 20px; }
+
+        /* TOOL AREA */
+        .tool-card { 
+            background: var(--bg-card); border: 1px solid var(--border); 
+            border-radius: 16px; padding: 30px; text-align: center; margin-bottom: 30px;
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+        }
+
+        .drop-zone {
+            border: 2px dashed #3f3f46; border-radius: 12px; padding: 40px 20px;
+            cursor: pointer; transition: 0.2s; background: #121215; margin-bottom: 20px;
+        }
+        .drop-zone:hover { border-color: var(--primary); background: rgba(245, 158, 11, 0.05); }
+        .drop-zone i { font-size: 2.5rem; color: var(--text-muted); margin-bottom: 15px; }
+        .drop-zone p { margin: 0; font-weight: 600; color: var(--text-main); }
+
+        #preview-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 10px;
+            margin-bottom: 20px;
+        }
+        .preview-item {
+            position: relative; height: 80px; border-radius: 6px; overflow: hidden; border: 1px solid var(--border);
+        }
+        .preview-item img { width: 100%; height: 100%; object-fit: cover; }
+        .preview-label { 
+            position: absolute; bottom: 0; width: 100%; background: rgba(0,0,0,0.7); 
+            color: white; font-size: 0.7rem; padding: 2px; text-align: center;
+        }
+
+        .btn {
+            background: var(--primary); color: #000; border: none; padding: 14px 30px;
+            border-radius: 8px; font-weight: 700; font-size: 1rem; cursor: pointer;
+            display: inline-flex; align-items: center; gap: 10px; width: 100%; justify-content: center;
+            transition: 0.2s;
+        }
+        .btn:hover { transform: translateY(-2px); opacity: 0.9; }
+
+        /* Features Grid */
+        .features-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 40px; }
+        .feature-item { background: #121215; padding: 10px; border-radius: 8px; border: 1px solid var(--border); text-align: center; font-size: 0.8rem; color: var(--text-muted); font-weight: 500; }
+        .feature-item i { color: var(--primary); margin-right: 5px; }
+
+        /* FAQ Styling */
+        .faq-item { background: #121215; border: 1px solid var(--border); border-radius: 8px; padding: 15px; margin-bottom: 10px; }
+        .faq-q { font-weight: 600; color: var(--text-main); margin-bottom: 5px; display: block; }
+        .faq-a { color: var(--text-muted); font-size: 0.9rem; margin: 0; }
+
+        /* Internal Links */
+        .internal-links { margin-top: 40px; border-top: 1px solid var(--border); padding-top: 30px; }
+        .link-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; }
+        .link-btn { 
+            background: #121215; border: 1px solid var(--border); color: var(--text-muted); 
+            padding: 10px; text-align: center; border-radius: 6px; text-decoration: none; font-size: 0.85rem; transition: 0.2s;
+        }
+        .link-btn:hover { border-color: var(--primary); color: var(--text-main); }
+
+        .last-updated { text-align: center; color: #52525b; font-size: 0.8rem; margin-top: 40px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <a href="index.html" class="nav-link"><i class="fa-solid fa-arrow-left"></i> Back to All Tools</a>
+
+    <h1>JPG to PDF for Aadhaar Upload</h1>
+
+    <p>UIDAI requires documents (Identity/Address Proof) to be uploaded as a single PDF. Use this tool to combine your <strong>Front and Back photos</strong> into one file under 2MB.</p>
+
+    <div class="tool-card">
+        <div class="drop-zone" onclick="document.getElementById('fileInput').click()">
+            <i class="fa-solid fa-id-card"></i>
+            <p>Select Front & Back Photos</p>
+            <span style="font-size:0.8rem; color:#666;">JPG, PNG • Max 20MB Total</span>
+        </div>
+        <input type="file" id="fileInput" hidden multiple accept="image/*">
+
+        <div id="preview-grid"></div>
+
+        <button class="btn" id="convertBtn" onclick="convertPDF()" style="display:none;">
+            <i class="fa-solid fa-file-pdf"></i> Download Aadhaar PDF
+        </button>
+        <p id="statusMsg" style="margin-top:10px; font-size:0.9rem; display:none;"></p>
+    </div>
+
+    <div class="features-grid">
+        <div class="feature-item"><i class="fa-solid fa-object-group"></i> Combine Photos</div>
+        <div class="feature-item"><i class="fa-solid fa-compress"></i> Max 2MB Size</div>
+        <div class="feature-item"><i class="fa-solid fa-fingerprint"></i> UIDAI Safe</div>
+    </div>
+
+    <h2>Document Upload Guidelines (UIDAI)</h2>
+    <ul>
+        <li><strong>Format:</strong> PDF (Preferred for multiple pages) or JPEG/PNG.</li>
+        <li><strong>Size:</strong> Max 2 MB.</li>
+        <li><strong>Content:</strong> Must show both sides of the document if address/details are on the back (e.g., Voter ID, DL).</li>
+        <li><strong>Clarity:</strong> Details like Name and Address must be readable.</li>
+    </ul>
+
+    <h2>How to Create PDF for Aadhaar Update</h2>
+    <ol>
+        <li>Click "Select Front & Back Photos".</li>
+        <li>Choose the images of your document (e.g., Front side and Back side).</li>
+        <li>The tool combines them onto separate pages in one PDF file.</li>
+        <li>It automatically optimizes the size to be under 2MB. Download and upload.</li>
+    </ol>
+
+    <h2>Frequently Asked Questions</h2>
+    
+    <div class="faq-item">
+        <span class="faq-q">How to combine front and back photos for Aadhaar upload?</span>
+        <p class="faq-a">Select both the front and back photos of your document in this tool. It will merge them into a single PDF file which is required for the UIDAI portal.</p>
+    </div>
+
+    <div class="faq-item">
+        <span class="faq-q">What is the maximum file size for Aadhaar PDF?</span>
+        <p class="faq-a">The maximum allowed file size for document upload on the myAadhaar portal is 2 MB. This tool automatically ensures your PDF stays within this limit.</p>
+    </div>
+
+    <div class="faq-item">
+        <span class="faq-q">Is it safe to upload my ID proofs here?</span>
+        <p class="faq-a">Yes. This tool works entirely in your browser (Client-Side). Your photos and the generated PDF are processed locally and never sent to any server.</p>
+    </div>
+
+    <div class="internal-links">
+        <h3 style="color:var(--text-muted); font-size:0.9rem; text-transform:uppercase; margin-bottom:15px;">Related Tools</h3>
+        <div class="link-grid">
+            <a href="resize-image-for-aadhaar-card.html" class="link-btn">Resize Photo for Aadhaar</a>
+            <a href="compress-pdf-for-aadhaar-upload.html" class="link-btn">Compress PDF for Aadhaar</a>
+            <a href="compress-pdf-to-200kb.html" class="link-btn">Compress PDF to 200KB</a>
+            <a href="resize-image-for-pan-card.html" class="link-btn">Resize for PAN Card</a>
+        </div>
+    </div>
+
+    <p class="last-updated">Last updated: February 2026</p>
+
+</div>
+
+<script>
+    const fileInput = document.getElementById('fileInput');
+    const previewGrid = document.getElementById('preview-grid');
+    const convertBtn = document.getElementById('convertBtn');
+    const statusMsg = document.getElementById('statusMsg');
+    
+    let selectedFiles = [];
+
+    fileInput.addEventListener('change', function(e) {
+        if (e.target.files.length === 0) return;
+        
+        // Add new files to array
+        for(let file of e.target.files) {
+            selectedFiles.push(file);
+            addPreview(file);
+        }
+
+        if(selectedFiles.length > 0) {
+            convertBtn.style.display = 'inline-flex';
+        }
+    });
+
+    function addPreview(file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const div = document.createElement('div');
+            div.className = 'preview-item';
+            div.innerHTML = `<img src="${e.target.result}"><span class="preview-label">Page ${selectedFiles.indexOf(file) + 1}</span>`;
+            previewGrid.appendChild(div);
+        };
+        reader.readAsDataURL(file);
+    }
+
+    async function convertPDF() {
+        if(selectedFiles.length === 0) return;
+
+        statusMsg.style.display = 'block';
+        statusMsg.innerText = "Processing...";
+        statusMsg.style.color = "var(--primary)";
+
+        const { jsPDF } = window.jspdf;
+        const pdf = new jsPDF();
+        
+        // Use moderate compression to safely stay under 2MB for ~2-3 pages
+        const quality = 0.8; 
+
+        for (let i = 0; i < selectedFiles.length; i++) {
+            const file = selectedFiles[i];
+            const imgData = await getCompressedImage(file, quality);
+            
+            if (i > 0) pdf.addPage();
+
+            const imgProps = pdf.getImageProperties(imgData);
+            
+            // Layout Logic: Center image on A4
+            const pdfWidth = pdf.internal.pageSize.getWidth();
+            const pdfHeight = pdf.internal.pageSize.getHeight();
+            
+            const margin = 10;
+            const availableWidth = pdfWidth - (margin * 2);
+            const availableHeight = pdfHeight - (margin * 2);
+            
+            const ratio = Math.min(availableWidth / imgProps.width, availableHeight / imgProps.height);
+            
+            const w = imgProps.width * ratio;
+            const h = imgProps.height * ratio;
+            const x = (pdfWidth - w) / 2;
+            const y = (pdfHeight - h) / 2;
+
+            pdf.addImage(imgData, 'JPEG', x, y, w, h);
+        }
+
+        pdf.save("aadhaar-document.pdf");
+        statusMsg.innerText = "PDF Downloaded!";
+        statusMsg.style.color = "#10b981";
+    }
+
+    function getCompressedImage(file, quality) {
+        return new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                const img = new Image();
+                img.onload = function() {
+                    const canvas = document.createElement('canvas');
+                    let width = img.width;
+                    let height = img.height;
+                    const maxDim = 1500; // Cap resolution for file size safety
+
+                    if (width > maxDim || height > maxDim) {
+                        if (width > height) {
+                            height = Math.round((height *= maxDim / width));
+                            width = maxDim;
+                        } else {
+                            width = Math.round((width *= maxDim / height));
+                            height = maxDim;
+                        }
+                    }
+
+                    canvas.width = width;
+                    canvas.height = height;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, width, height);
+                    
+                    resolve(canvas.toDataURL('image/jpeg', quality));
+                };
+                img.src = event.target.result;
+            };
+            reader.readAsDataURL(file);
+        });
+    }
+</script>
+
+</body>
+</html>
