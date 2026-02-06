@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="canonical" href="https://omnitools.in/jpg-to-pdf-for-exam-applications.html">
+
+    <title>JPG to PDF for Exam Applications (Answer Sheets & Docs)</title>
+    
+    <meta name="description" content="Convert JPG images to PDF for online exam applications, answer sheet uploads, and assignments. Combine multiple photos into one PDF file. Free & Mobile friendly.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [{
+        "@type": "Question",
+        "name": "How to convert answer sheet photos to PDF?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Take photos of your answer pages in order. Select them all in this tool. It will combine them into a single PDF file suitable for uploading to your university portal."
+        }
+      },{
+        "@type": "Question",
+        "name": "What is the best size for uploading exam PDFs?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Most university portals allow up to 5MB or 10MB for answer scripts. For entrance exams (JEE/NEET) documents, the limit is usually smaller (200KB-500KB)."
+        }
+      },{
+        "@type": "Question",
+        "name": "Does this tool maintain handwriting clarity?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. We use a 'Standard' compression mode by default which reduces file size without blurring handwritten text, ensuring your answers are readable."
+        }
+      }]
+    }
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <style>
+        /* --- GOLD / ZINC THEME --- */
+        :root { 
+            --bg-body: #09090b; --bg-card: #0c0c0e; --primary: #f59e0b; 
+            --text-main: #ededef; --text-muted: #a1a1aa; --border: #1f1f22;
+        }
+        * { box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        
+        body { 
+            background: var(--bg-body); color: var(--text-main); margin: 0; padding: 20px; 
+            min-height: 100vh; display: flex; flex-direction: column; align-items: center;
+            background-image: linear-gradient(#1f1f22 1px, transparent 1px), linear-gradient(90deg, #1f1f22 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        .container { max-width: 700px; width: 100%; }
+        
+        .nav-link { color: var(--text-muted); text-decoration: none; display: flex; align-items: center; gap: 8px; margin-bottom: 20px; font-size: 0.9rem; transition:0.2s; }
+        .nav-link:hover { color: var(--primary); }
+
+        h1 { font-size: 1.8rem; margin: 0 0 10px 0; color: var(--text-main); font-weight: 800; letter-spacing: -0.02em; }
+        h2 { font-size: 1.3rem; margin: 40px 0 15px 0; color: var(--text-main); font-weight: 700; border-left: 4px solid var(--primary); padding-left: 15px; }
+        p, li { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 10px; }
+        ul { padding-left: 20px; }
+
+        /* TOOL AREA */
+        .tool-card { 
+            background: var(--bg-card); border: 1px solid var(--border); 
+            border-radius: 16px; padding: 30px; text-align: center; margin-bottom: 30px;
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+        }
+
+        .drop-zone {
+            border: 2px dashed #3f3f46; border-radius: 12px; padding: 40px 20px;
+            cursor: pointer; transition: 0.2s; background: #121215; margin-bottom: 20px;
+        }
+        .drop-zone:hover { border-color: var(--primary); background: rgba(245, 158, 11, 0.05); }
+        .drop-zone i { font-size: 2.5rem; color: var(--text-muted); margin-bottom: 15px; }
+        .drop-zone p { margin: 0; font-weight: 600; color: var(--text-main); }
+
+        .settings-bar {
+            display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap;
+        }
+        select, .btn-sm {
+            flex: 1; padding: 10px; background: #18181b; border: 1px solid var(--border);
+            color: var(--text-main); border-radius: 8px; font-size: 0.9rem; cursor: pointer;
+        }
+
+        #preview-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 10px;
+            margin-bottom: 20px;
+        }
+        .preview-item {
+            position: relative; height: 100px; border-radius: 6px; overflow: hidden; border: 1px solid var(--border);
+        }
+        .preview-item img { width: 100%; height: 100%; object-fit: cover; }
+        .preview-count { 
+            position: absolute; bottom: 2px; right: 2px; background: rgba(0,0,0,0.7); 
+            color: white; font-size: 0.8rem; padding: 2px 6px; border-radius: 4px; font-weight: 600;
+        }
+
+        .btn {
+            background: var(--primary); color: #000; border: none; padding: 14px 30px;
+            border-radius: 8px; font-weight: 700; font-size: 1rem; cursor: pointer;
+            display: inline-flex; align-items: center; gap: 10px; width: 100%; justify-content: center;
+            transition: 0.2s;
+        }
+        .btn:hover { transform: translateY(-2px); opacity: 0.9; }
+
+        /* Features Grid */
+        .features-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 40px; }
+        .feature-item { background: #121215; padding: 10px; border-radius: 8px; border: 1px solid var(--border); text-align: center; font-size: 0.8rem; color: var(--text-muted); font-weight: 500; }
+        .feature-item i { color: var(--primary); margin-right: 5px; }
+
+        /* FAQ Styling */
+        .faq-item { background: #121215; border: 1px solid var(--border); border-radius: 8px; padding: 15px; margin-bottom: 10px; }
+        .faq-q { font-weight: 600; color: var(--text-main); margin-bottom: 5px; display: block; }
+        .faq-a { color: var(--text-muted); font-size: 0.9rem; margin: 0; }
+
+        /* Internal Links */
+        .internal-links { margin-top: 40px; border-top: 1px solid var(--border); padding-top: 30px; }
+        .link-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; }
+        .link-btn { 
+            background: #121215; border: 1px solid var(--border); color: var(--text-muted); 
+            padding: 10px; text-align: center; border-radius: 6px; text-decoration: none; font-size: 0.85rem; transition: 0.2s;
+        }
+        .link-btn:hover { border-color: var(--primary); color: var(--text-main); }
+
+        .last-updated { text-align: center; color: #52525b; font-size: 0.8rem; margin-top: 40px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <a href="index.html" class="nav-link"><i class="fa-solid fa-arrow-left"></i> Back to All Tools</a>
+
+    <h1>JPG to PDF for Exam Applications</h1>
+
+    <p>Need to upload your answer sheets or assignment photos as a single PDF? This tool combines multiple JPGs into one PDF file, optimized for University and Entrance Exam portals.</p>
+
+    <div class="tool-card">
+        <div class="drop-zone" onclick="document.getElementById('fileInput').click()">
+            <i class="fa-solid fa-book-open"></i>
+            <p>Select Answer Sheets (JPG)</p>
+            <span style="font-size:0.8rem; color:#666;">Select multiple pages in order</span>
+        </div>
+        <input type="file" id="fileInput" hidden multiple accept="image/*">
+
+        <div id="preview-grid"></div>
+
+        <div class="settings-bar" id="settingsArea" style="display:none;">
+            <select id="compressionLevel">
+                <option value="0.95">High Quality (Assignments)</option>
+                <option value="0.75" selected>Standard (Recommended)</option>
+                <option value="0.5">Low Size (Slow Internet)</option>
+            </select>
+            <select id="pageSize">
+                <option value="a4">Format: A4 Page</option>
+                <option value="fit">Format: Same as Photo</option>
+            </select>
+        </div>
+
+        <button class="btn" id="convertBtn" onclick="convertPDF()" style="display:none;">
+            <i class="fa-solid fa-file-pdf"></i> Convert to PDF
+        </button>
+        <p id="statusMsg" style="margin-top:10px; font-size:0.9rem; display:none;"></p>
+    </div>
+
+    <div class="features-grid">
+        <div class="feature-item"><i class="fa-solid fa-copy"></i> Multi-Page</div>
+        <div class="feature-item"><i class="fa-solid fa-pen-nib"></i> Clear Handwriting</div>
+        <div class="feature-item"><i class="fa-solid fa-mobile"></i> Phone Ready</div>
+    </div>
+
+    <h2>Exam Document Guidelines</h2>
+    <ul>
+        <li><strong>Semester Exams:</strong> Often require combining 10-20 pages of handwritten answers into one PDF file (Max 10MB).</li>
+        <li><strong>Entrance Exams (JEE/NEET):</strong> Require single-page documents like Marksheets/Caste Certificates (Max 300KB).</li>
+        <li><strong>Assignments:</strong> Should be clear and legible. Use "High Quality" mode.</li>
+    </ul>
+
+    <h2>Frequently Asked Questions</h2>
+    
+    <div class="faq-item">
+        <span class="faq-q">How to convert answer sheet photos to PDF?</span>
+        <p class="faq-a">Take photos of your answer pages in order. Select them all in this tool. It will combine them into a single PDF file suitable for uploading to your university portal.</p>
+    </div>
+
+    <div class="faq-item">
+        <span class="faq-q">What is the best size for uploading exam PDFs?</span>
+        <p class="faq-a">Most university portals allow up to 5MB or 10MB for answer scripts. For entrance exams (JEE/NEET) documents, the limit is usually smaller (200KB-500KB).</p>
+    </div>
+
+    <div class="faq-item">
+        <span class="faq-q">Does this tool maintain handwriting clarity?</span>
+        <p class="faq-a">Yes. We use a 'Standard' compression mode by default which reduces file size without blurring handwritten text, ensuring your answers are readable.</p>
+    </div>
+
+    <div class="internal-links">
+        <h3 style="color:var(--text-muted); font-size:0.9rem; text-transform:uppercase; margin-bottom:15px;">Related Tools</h3>
+        <div class="link-grid">
+            <a href="compress-pdf-for-job-application.html" class="link-btn">Compress PDF (Resume)</a>
+            <a href="resize-signature-for-exam-applications.html" class="link-btn">Resize Signature</a>
+            <a href="strong-password-generator-for-students.html" class="link-btn">Student Password Gen</a>
+            <a href="resize-image-20kb-for-ssc-form.html" class="link-btn">Resize Photo (SSC)</a>
+        </div>
+    </div>
+
+    <p class="last-updated">Last updated: February 2026</p>
+
+</div>
+
+<script>
+    const fileInput = document.getElementById('fileInput');
+    const previewGrid = document.getElementById('preview-grid');
+    const settingsArea = document.getElementById('settingsArea');
+    const convertBtn = document.getElementById('convertBtn');
+    const statusMsg = document.getElementById('statusMsg');
+    
+    let selectedFiles = [];
+
+    fileInput.addEventListener('change', function(e) {
+        if (e.target.files.length === 0) return;
+        
+        // Add new files to array
+        for(let file of e.target.files) {
+            selectedFiles.push(file);
+            addPreview(file);
+        }
+
+        if(selectedFiles.length > 0) {
+            settingsArea.style.display = 'flex';
+            convertBtn.style.display = 'inline-flex';
+        }
+    });
+
+    function addPreview(file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const div = document.createElement('div');
+            div.className = 'preview-item';
+            div.innerHTML = `<img src="${e.target.result}"><span class="preview-count">Page ${selectedFiles.indexOf(file) + 1}</span>`;
+            previewGrid.appendChild(div);
+        };
+        reader.readAsDataURL(file);
+    }
+
+    async function convertPDF() {
+        if(selectedFiles.length === 0) return;
+
+        statusMsg.style.display = 'block';
+        statusMsg.innerText = "Processing pages...";
+        statusMsg.style.color = "var(--primary)";
+
+        const { jsPDF } = window.jspdf;
+        const pdf = new jsPDF();
+        
+        const quality = parseFloat(document.getElementById('compressionLevel').value);
+        const pageSize = document.getElementById('pageSize').value;
+
+        for (let i = 0; i < selectedFiles.length; i++) {
+            const file = selectedFiles[i];
+            const imgData = await getCompressedImage(file, quality);
+            
+            if (i > 0) pdf.addPage();
+
+            const imgProps = pdf.getImageProperties(imgData);
+            
+            if (pageSize === 'a4') {
+                const pdfWidth = pdf.internal.pageSize.getWidth();
+                const pdfHeight = pdf.internal.pageSize.getHeight();
+                
+                // Margin for better printability
+                const margin = 10;
+                const availableWidth = pdfWidth - (margin * 2);
+                const availableHeight = pdfHeight - (margin * 2);
+                
+                const ratio = Math.min(availableWidth / imgProps.width, availableHeight / imgProps.height);
+                
+                const w = imgProps.width * ratio;
+                const h = imgProps.height * ratio;
+                const x = (pdfWidth - w) / 2;
+                const y = (pdfHeight - h) / 2;
+
+                pdf.addImage(imgData, 'JPEG', x, y, w, h);
+
+            } else {
+                // Fit to Image (Custom Page Size)
+                pdf.deletePage(i+1); // remove default A4
+                const mmWidth = imgProps.width * 0.264583;
+                const mmHeight = imgProps.height * 0.264583;
+                pdf.addPage([mmWidth, mmHeight]); 
+                pdf.addImage(imgData, 'JPEG', 0, 0, mmWidth, mmHeight);
+            }
+        }
+
+        pdf.save("exam-answer-sheet.pdf");
+        statusMsg.innerText = "Success! PDF Downloaded.";
+        statusMsg.style.color = "#10b981";
+    }
+
+    function getCompressedImage(file, quality) {
+        return new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                const img = new Image();
+                img.onload = function() {
+                    const canvas = document.createElement('canvas');
+                    // Resize huge camera photos
+                    let width = img.width;
+                    let height = img.height;
+                    const maxDim = 1800; // Good balance for A4 readability
+
+                    if (width > maxDim || height > maxDim) {
+                        if (width > height) {
+                            height = Math.round((height *= maxDim / width));
+                            width = maxDim;
+                        } else {
+                            width = Math.round((width *= maxDim / height));
+                            height = maxDim;
+                        }
+                    }
+
+                    canvas.width = width;
+                    canvas.height = height;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, width, height);
+                    
+                    resolve(canvas.toDataURL('image/jpeg', quality));
+                };
+                img.src = event.target.result;
+            };
+            reader.readAsDataURL(file);
+        });
+    }
+</script>
+
+</body>
+</html>
