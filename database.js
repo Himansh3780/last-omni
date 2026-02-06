@@ -122,7 +122,54 @@ const toolsDB = [
     // =========================================
     // CATEGORY 2: SIGNATURE RESIZE (High Intent)
     // =========================================
-    // Add your tools here...
+   { 
+        "name": "Signature Resize (SSC)", 
+        "url": "resize-signature-20kb-for-ssc", 
+        "cat": "signature", 
+        "icon": "fa-file-signature", 
+        "desc": "Resize signature to 10-20KB for SSC CGL/CHSL.", 
+        "tag": "SSC" 
+    },
+    { 
+        "name": "Signature Resize 50KB", 
+        "url": "resize-signature-50kb-for-ssc", 
+        "cat": "signature", 
+        "icon": "fa-pen-nib", 
+        "desc": "Resize signature to 50KB (High Quality) for exams.", 
+        "tag": "HQ" 
+    },
+    { 
+        "name": "Signature Resize (UPSC)", 
+        "url": "resize-signature-20kb-for-upsc", 
+        "cat": "signature", 
+        "icon": "fa-pen-clip", 
+        "desc": "Resize signature to 20KB (350x150px) for UPSC.", 
+        "tag": "UPSC" 
+    },
+    { 
+        "name": "Resize Signature (Govt)", 
+        "url": "resize-signature-for-govt-forms", 
+        "cat": "signature", 
+        "icon": "fa-file-contract", 
+        "desc": "Universal signature resizer (10-20KB) for Bank/SSC exams.", 
+        "tag": "ALL" 
+    },
+    { 
+        "name": "Signature Resize (Universal)", 
+        "url": "resize-signature-for-exam-applications", 
+        "cat": "signature", 
+        "icon": "fa-file-signature", 
+        "desc": "Universal signature resizer for all exam applications.", 
+        "tag": "ALL" 
+    },
+    { 
+        "name": "Signature Cleaner", 
+        "url": "resize-signature-with-white-background", 
+        "cat": "signature", 
+        "icon": "fa-wand-magic-sparkles", 
+        "desc": "Auto-remove grey background from signature photos.", 
+        "tag": "NEW" 
+    },
 
 
     // =========================================
