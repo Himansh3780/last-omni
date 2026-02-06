@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="canonical" href="https://omnitools.in/resize-image-20kb-for-railway-form.html">
+
+    <title>Resize Image to 20KB for Railway Form Online (Instant & Free)</title>
+    
+    <meta name="description" content="Resize photo to 20KB for RRB NTPC, Group D & ALP exams. Free online tool to compress image for Railway recruitment. Automatic 35mm x 45mm sizing.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [{
+        "@type": "Question",
+        "name": "What is the photo size for Railway application?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "RRB requires the photograph to be between 20KB and 50KB. This tool targets the 20KB size to ensure fast upload."
+        }
+      },{
+        "@type": "Question",
+        "name": "Does this tool work for RRB ALP and Group D?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, this resizer works for all Railway Recruitment Board exams including ALP, Technician, NTPC, and Group D."
+        }
+      },{
+        "@type": "Question",
+        "name": "Do I need the date on my Railway photo?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, Railway notifications strictly mention that the date of taking the photograph must be printed on it."
+        }
+      },{
+        "@type": "Question",
+        "name": "Is my photo safe here?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Absolutely. All processing is done locally in your browser. No photos are uploaded to any server."
+        }
+      }]
+    }
+    </script>
+
+    <style>
+        /* --- GOLD / ZINC THEME --- */
+        :root { 
+            --bg-body: #09090b; --bg-card: #0c0c0e; --primary: #f59e0b; 
+            --text-main: #ededef; --text-muted: #a1a1aa; --border: #1f1f22;
+        }
+        * { box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        
+        body { 
+            background: var(--bg-body); color: var(--text-main); margin: 0; padding: 20px; 
+            min-height: 100vh; display: flex; flex-direction: column; align-items: center;
+            background-image: linear-gradient(#1f1f22 1px, transparent 1px), linear-gradient(90deg, #1f1f22 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        .container { max-width: 700px; width: 100%; }
+        
+        .nav-link { color: var(--text-muted); text-decoration: none; display: flex; align-items: center; gap: 8px; margin-bottom: 20px; font-size: 0.9rem; transition:0.2s; }
+        .nav-link:hover { color: var(--primary); }
+
+        h1 { font-size: 1.8rem; margin: 0 0 10px 0; color: var(--text-main); font-weight: 800; letter-spacing: -0.02em; }
+        h2 { font-size: 1.3rem; margin: 40px 0 15px 0; color: var(--text-main); font-weight: 700; border-left: 4px solid var(--primary); padding-left: 15px; }
+        p, li { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 10px; }
+        ul { padding-left: 20px; }
+
+        /* TOOL AREA */
+        .tool-card { 
+            background: var(--bg-card); border: 1px solid var(--border); 
+            border-radius: 16px; padding: 30px; text-align: center; margin-bottom: 30px;
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+        }
+
+        .drop-zone {
+            border: 2px dashed #3f3f46; border-radius: 12px; padding: 40px 20px;
+            cursor: pointer; transition: 0.2s; background: #121215; margin-bottom: 20px;
+        }
+        .drop-zone:hover { border-color: var(--primary); background: rgba(245, 158, 11, 0.05); }
+        .drop-zone i { font-size: 2.5rem; color: var(--text-muted); margin-bottom: 15px; }
+        .drop-zone p { margin: 0; font-weight: 600; color: var(--text-main); }
+
+        #preview-container { display: none; margin-top: 20px; border-top: 1px solid var(--border); padding-top: 20px; }
+        #preview-img { max-width: 200px; border: 4px solid var(--border); border-radius: 8px; }
+        
+        .stat-box { 
+            background: #18181b; padding: 12px; border-radius: 8px; margin: 15px 0; 
+            display: inline-block; border: 1px solid var(--border);
+        }
+        .success-text { color: #10b981; font-weight: 700; }
+
+        .btn {
+            background: var(--primary); color: #000; border: none; padding: 14px 30px;
+            border-radius: 8px; font-weight: 700; font-size: 1rem; cursor: pointer;
+            display: inline-flex; align-items: center; gap: 10px; width: 100%; justify-content: center;
+            transition: 0.2s;
+        }
+        .btn:hover { transform: translateY(-2px); opacity: 0.9; }
+
+        /* Features Grid */
+        .features-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 40px; }
+        .feature-item { background: #121215; padding: 10px; border-radius: 8px; border: 1px solid var(--border); text-align: center; font-size: 0.8rem; color: var(--text-muted); font-weight: 500; }
+        .feature-item i { color: var(--primary); margin-right: 5px; }
+
+        /* FAQ Styling */
+        .faq-item { background: #121215; border: 1px solid var(--border); border-radius: 8px; padding: 15px; margin-bottom: 10px; }
+        .faq-q { font-weight: 600; color: var(--text-main); margin-bottom: 5px; display: block; }
+        .faq-a { color: var(--text-muted); font-size: 0.9rem; margin: 0; }
+
+        /* Internal Links */
+        .internal-links { margin-top: 40px; border-top: 1px solid var(--border); padding-top: 30px; }
+        .link-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; }
+        .link-btn { 
+            background: #121215; border: 1px solid var(--border); color: var(--text-muted); 
+            padding: 10px; text-align: center; border-radius: 6px; text-decoration: none; font-size: 0.85rem; transition: 0.2s;
+        }
+        .link-btn:hover { border-color: var(--primary); color: var(--text-main); }
+
+        .last-updated { text-align: center; color: #52525b; font-size: 0.8rem; margin-top: 40px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <a href="index.html" class="nav-link"><i class="fa-solid fa-arrow-left"></i> Back to All Tools</a>
+
+    <h1>Resize Image to 20KB for Railway Form</h1>
+
+    <p>Railway Recruitment Boards (RRB) require strict adherence to photo size (20-50KB). This tool resizes your photo to <strong>20KB</strong> and fixes dimensions to 35mm x 45mm instantly.</p>
+
+    <div class="tool-card">
+        <div class="drop-zone" onclick="document.getElementById('fileInput').click()">
+            <i class="fa-solid fa-train"></i>
+            <p>Upload Railway Photo</p>
+            <span style="font-size:0.8rem; color:#666;">JPG, JPEG supported</span>
+        </div>
+        <input type="file" id="fileInput" hidden accept="image/*">
+
+        <div id="preview-container">
+            <p style="color:var(--text-muted); font-size:0.9rem;">Optimized Result:</p>
+            <img id="preview-img">
+            
+            <div class="stat-box">
+                <div id="size-text" class="success-text">Calculating...</div>
+                <div style="font-size:0.8rem; color:#666; margin-top:4px;">Dimensions: 350 x 450 px</div>
+            </div>
+
+            <button class="btn" id="downloadBtn" onclick="downloadImage()">
+                <i class="fa-solid fa-download"></i> Download Image
+            </button>
+        </div>
+    </div>
+
+    <div class="features-grid">
+        <div class="feature-item"><i class="fa-solid fa-bolt"></i> Instant Resize</div>
+        <div class="feature-item"><i class="fa-solid fa-train"></i> RRB Standard</div>
+        <div class="feature-item"><i class="fa-solid fa-mobile-screen"></i> Mobile Friendly</div>
+    </div>
+
+    <h2>Railway Photo Requirements (NTPC, Group D, ALP)</h2>
+    <ul>
+        <li><strong>Size Range:</strong> 20KB to 50KB.</li>
+        <li><strong>Dimensions:</strong> 35mm (width) x 45mm (height).</li>
+        <li><strong>Format:</strong> JPEG / JPG.</li>
+        <li><strong>Special Rule:</strong> Date of Photo must be printed. No glasses/caps.</li>
+    </ul>
+
+    <h2>How to Resize Image for Railway Form</h2>
+    <ol>
+        <li>Select your photo by clicking "Upload Railway Photo".</li>
+        <li>The tool adjusts dimensions to 3.5cm x 4.5cm automatically.</li>
+        <li>It compresses the file to stay safely around 20KB-25KB.</li>
+        <li>Download and upload to the RRB website.</li>
+    </ol>
+
+    <h2>Frequently Asked Questions</h2>
+    
+    <div class="faq-item">
+        <span class="faq-q">What is the photo size for Railway application?</span>
+        <p class="faq-a">RRB requires the photograph to be between 20KB and 50KB. This tool targets the 20KB size to ensure fast upload.</p>
+    </div>
+
+    <div class="faq-item">
+        <span class="faq-q">Does this tool work for RRB ALP and Group D?</span>
+        <p class="faq-a">Yes, this resizer works for all Railway Recruitment Board exams including ALP, Technician, NTPC, and Group D.</p>
+    </div>
+
+    <div class="faq-item">
+        <span class="faq-q">Do I need the date on my Railway photo?</span>
+        <p class="faq-a">Yes, Railway notifications strictly mention that the date of taking the photograph must be printed on it.</p>
+    </div>
+
+    <div class="faq-item">
+        <span class="faq-q">Is my photo safe here?</span>
+        <p class="faq-a">Absolutely. All processing is done locally in your browser. No photos are uploaded to any server.</p>
+    </div>
+
+    <div class="internal-links">
+        <h3 style="color:var(--text-muted); font-size:0.9rem; text-transform:uppercase; margin-bottom:15px;">Related Tools</h3>
+        <div class="link-grid">
+            <a href="resize-image-20kb-for-ssc-form.html" class="link-btn">Resize to 20KB for SSC</a>
+            <a href="resize-image-20kb-for-upsc-form.html" class="link-btn">Resize to 20KB for UPSC</a>
+            <a href="resize-signature-20kb-for-ssc.html" class="link-btn">Resize Signature for Exams</a>
+            <a href="compress-pdf-to-200kb.html" class="link-btn">Compress PDF to 200KB</a>
+        </div>
+    </div>
+
+    <p class="last-updated">Last updated: February 2026</p>
+
+</div>
+
+<script>
+    // --- RAILWAY CONFIGURATION ---
+    const CONFIG = {
+        maxSizeKB: 25,      // Target low end of range (20-50) for safety
+        minSizeKB: 15,      
+        width: 350,         // 3.5cm
+        height: 450,        // 4.5cm
+        filename: "railway-photo-20kb.jpg"
+    };
+
+    const fileInput = document.getElementById('fileInput');
+    const previewContainer = document.getElementById('preview-container');
+    const previewImg = document.getElementById('preview-img');
+    const sizeText = document.getElementById('size-text');
+    let downloadUrl = "";
+
+    fileInput.addEventListener('change', function(e) {
+        if (e.target.files.length === 0) return;
+        processImage(e.target.files[0]);
+    });
+
+    function processImage(file) {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+            const img = new Image();
+            img.onload = function() {
+                const canvas = document.createElement('canvas');
+                canvas.width = CONFIG.width;
+                canvas.height = CONFIG.height;
+                const ctx = canvas.getContext('2d');
+
+                ctx.fillStyle = "#FFFFFF";
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                ctx.drawImage(img, 0, 0, CONFIG.width, CONFIG.height);
+
+                let quality = 0.9;
+                let dataUrl = canvas.toDataURL('image/jpeg', quality);
+                
+                const compress = () => {
+                    let sizeKB = Math.round((dataUrl.length * 3 / 4) / 1024);
+                    
+                    if (sizeKB > CONFIG.maxSizeKB && quality > 0.1) {
+                        quality -= 0.05;
+                        dataUrl = canvas.toDataURL('image/jpeg', quality);
+                        compress();
+                    } else {
+                        showResult(dataUrl, sizeKB);
+                    }
+                };
+                compress();
+            };
+            img.src = event.target.result;
+        };
+        reader.readAsDataURL(file);
+    }
+
+    function showResult(url, size) {
+        previewImg.src = url;
+        downloadUrl = url;
+        sizeText.innerText = `Final Size: ${size} KB`;
+        
+        if (size >= 15 && size <= 50) {
+             sizeText.innerHTML += " <span style='color:#10b981; font-size:0.8rem;'>(Valid for Railway)</span>";
+        }
+
+        previewContainer.style.display = 'block';
+    }
+
+    function downloadImage() {
+        const a = document.createElement('a');
+        a.href = downloadUrl;
+        a.download = CONFIG.filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+    }
+</script>
+
+</body>
+</html>
