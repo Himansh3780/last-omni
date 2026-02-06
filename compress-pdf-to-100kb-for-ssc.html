@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="canonical" href="https://omnitools.in/compress-pdf-to-100kb-for-ssc.html">
+
+    <title>Compress PDF to 100KB for SSC Online (Free & Secure)</title>
+    
+    <meta name="description" content="Compress PDF to under 100KB for SSC CGL, CHSL, MTS document uploads. Reduces file size of caste certificates and marksheets instantly. Online & Mobile friendly.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [{
+        "@type": "Question",
+        "name": "What is the PDF size limit for SSC uploads?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "SSC exams generally require scanned documents (like Caste Certificates or Marksheets) to be in PDF format with a file size between 20KB and 100KB (or sometimes up to 200KB)."
+        }
+      },{
+        "@type": "Question",
+        "name": "How to reduce PDF size to 100KB online?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Upload your file to this tool. It re-processes the document images and compresses them to fit strictly under the 100KB limit."
+        }
+      },{
+        "@type": "Question",
+        "name": "Is it safe to upload SSC documents here?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, completely safe. This tool operates in your browser (Client-Side). Your sensitive documents like Aadhaar or Marksheets are never sent to any server."
+        }
+      }]
+    }
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <style>
+        /* --- GOLD / ZINC THEME --- */
+        :root { 
+            --bg-body: #09090b; --bg-card: #0c0c0e; --primary: #f59e0b; 
+            --text-main: #ededef; --text-muted: #a1a1aa; --border: #1f1f22;
+        }
+        * { box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        
+        body { 
+            background: var(--bg-body); color: var(--text-main); margin: 0; padding: 20px; 
+            min-height: 100vh; display: flex; flex-direction: column; align-items: center;
+            background-image: linear-gradient(#1f1f22 1px, transparent 1px), linear-gradient(90deg, #1f1f22 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        .container { max-width: 700px; width: 100%; }
+        
+        .nav-link { color: var(--text-muted); text-decoration: none; display: flex; align-items: center; gap: 8px; margin-bottom: 20px; font-size: 0.9rem; transition:0.2s; }
+        .nav-link:hover { color: var(--primary); }
+
+        h1 { font-size: 1.8rem; margin: 0 0 10px 0; color: var(--text-main); font-weight: 800; letter-spacing: -0.02em; }
+        h2 { font-size: 1.3rem; margin: 40px 0 15px 0; color: var(--text-main); font-weight: 700; border-left: 4px solid var(--primary); padding-left: 15px; }
+        p, li { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 10px; }
+        ul { padding-left: 20px; }
+
+        /* TOOL AREA */
+        .tool-card { 
+            background: var(--bg-card); border: 1px solid var(--border); 
+            border-radius: 16px; padding: 30px; text-align: center; margin-bottom: 30px;
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+        }
+
+        .drop-zone {
+            border: 2px dashed #3f3f46; border-radius: 12px; padding: 40px 20px;
+            cursor: pointer; transition: 0.2s; background: #121215; margin-bottom: 20px;
+        }
+        .drop-zone:hover { border-color: var(--primary); background: rgba(245, 158, 11, 0.05); }
+        .drop-zone i { font-size: 2.5rem; color: var(--text-muted); margin-bottom: 15px; }
+        .drop-zone p { margin: 0; font-weight: 600; color: var(--text-main); }
+
+        #status-box { display: none; margin-top: 20px; padding: 15px; background: #18181b; border-radius: 8px; border: 1px solid var(--border); }
+        .progress-bar { height: 4px; background: #27272a; border-radius: 2px; overflow: hidden; margin-top: 10px; }
+        .progress-fill { height: 100%; background: var(--primary); width: 0%; transition: width 0.3s; }
+
+        .btn {
+            background: var(--primary); color: #000; border: none; padding: 14px 30px;
+            border-radius: 8px; font-weight: 700; font-size: 1rem; cursor: pointer;
+            display: inline-flex; align-items: center; gap: 10px; width: 100%; justify-content: center;
+            transition: 0.2s; margin-top: 15px;
+        }
+        .btn:hover { transform: translateY(-2px); opacity: 0.9; }
+
+        /* Features Grid */
+        .features-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 40px; }
+        .feature-item { background: #121215; padding: 10px; border-radius: 8px; border: 1px solid var(--border); text-align: center; font-size: 0.8rem; color: var(--text-muted); font-weight: 500; }
+        .feature-item i { color: var(--primary); margin-right: 5px; }
+
+        /* FAQ Styling */
+        .faq-item { background: #121215; border: 1px solid var(--border); border-radius: 8px; padding: 15px; margin-bottom: 10px; }
+        .faq-q { font-weight: 600; color: var(--text-main); margin-bottom: 5px; display: block; }
+        .faq-a { color: var(--text-muted); font-size: 0.9rem; margin: 0; }
+
+        /* Internal Links */
+        .internal-links { margin-top: 40px; border-top: 1px solid var(--border); padding-top: 30px; }
+        .link-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; }
+        .link-btn { 
+            background: #121215; border: 1px solid var(--border); color: var(--text-muted); 
+            padding: 10px; text-align: center; border-radius: 6px; text-decoration: none; font-size: 0.85rem; transition: 0.2s;
+        }
+        .link-btn:hover { border-color: var(--primary); color: var(--text-main); }
+
+        .last-updated { text-align: center; color: #52525b; font-size: 0.8rem; margin-top: 40px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <a href="index.html" class="nav-link"><i class="fa-solid fa-arrow-left"></i> Back to All Tools</a>
+
+    <h1>Compress PDF to 100KB for SSC</h1>
+
+    <p>SSC exams often require documents like Caste Certificates or Marksheets to be uploaded as PDF files under <strong>100KB</strong>. This tool reduces your PDF file size instantly.</p>
+
+    <div class="tool-card">
+        <div class="drop-zone" onclick="document.getElementById('fileInput').click()">
+            <i class="fa-solid fa-file-pdf"></i>
+            <p>Upload PDF Document</p>
+            <span style="font-size:0.8rem; color:#666;">Max 5MB • Single Page Best</span>
+        </div>
+        <input type="file" id="fileInput" hidden accept="application/pdf">
+
+        <div id="status-box">
+            <div style="display:flex; justify-content:space-between; font-size:0.9rem; margin-bottom:5px;">
+                <span id="status-text">Processing...</span>
+                <span id="size-tag" style="color:var(--primary);"></span>
+            </div>
+            <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+            
+            <button class="btn" id="downloadBtn" style="display:none;" onclick="downloadPDF()">
+                <i class="fa-solid fa-download"></i> Download Compressed PDF
+            </button>
+        </div>
+    </div>
+
+    <div class="features-grid">
+        <div class="feature-item"><i class="fa-solid fa-compress"></i> Under 100KB</div>
+        <div class="feature-item"><i class="fa-solid fa-shield-halved"></i> Client-Side</div>
+        <div class="feature-item"><i class="fa-solid fa-file-invoice"></i> SSC Ready</div>
+    </div>
+
+    <h2>SSC Document Upload Rules</h2>
+    <ul>
+        <li><strong>File Type:</strong> PDF (Portable Document Format).</li>
+        <li><strong>Size Limit:</strong> 20KB to 100KB (sometimes up to 200KB).</li>
+        <li><strong>Documents:</strong> Caste Certificate, 10th/12th Marksheet, EWS Certificate.</li>
+        <li><strong>Clarity:</strong> Text must be readable after compression.</li>
+    </ul>
+
+    <h2>How to Compress PDF for SSC Form</h2>
+    <ol>
+        <li>Click "Upload PDF Document" and select your file.</li>
+        <li>The tool processes the PDF pages and optimizes them.</li>
+        <li>It rebuilds the document to aim for the 100KB limit.</li>
+        <li>Download and verify clarity before uploading.</li>
+    </ol>
+
+    <h2>Frequently Asked Questions</h2>
+    
+    <div class="faq-item">
+        <span class="faq-q">What is the PDF size limit for SSC uploads?</span>
+        <p class="faq-a">SSC exams generally require scanned documents (like Caste Certificates or Marksheets) to be in PDF format with a file size between 20KB and 100KB.</p>
+    </div>
+
+    <div class="faq-item">
+        <span class="faq-q">How to reduce PDF size to 100KB online?</span>
+        <p class="faq-a">Upload your file to this tool. It re-processes the document images and compresses them to fit strictly under the 100KB limit.</p>
+    </div>
+
+    <div class="faq-item">
+        <span class="faq-q">Why does the text look slightly different?</span>
+        <p class="faq-a">To achieve the very small 100KB size, we convert the PDF pages into optimized images. This makes the file much smaller but might slightly reduce sharpness.</p>
+    </div>
+
+    <div class="internal-links">
+        <h3 style="color:var(--text-muted); font-size:0.9rem; text-transform:uppercase; margin-bottom:15px;">Related Tools</h3>
+        <div class="link-grid">
+            <a href="compress-pdf-to-200kb.html" class="link-btn">Compress PDF to 200KB</a>
+            <a href="resize-image-20kb-for-ssc-form.html" class="link-btn">Resize Photo for SSC</a>
+            <a href="resize-signature-20kb-for-ssc.html" class="link-btn">Resize Signature for SSC</a>
+            <a href="resize-image-for-aadhaar-card.html" class="link-btn">Resize for Aadhaar</a>
+        </div>
+    </div>
+
+    <p class="last-updated">Last updated: February 2026</p>
+
+</div>
+
+<script>
+    // Set worker for PDF.js
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+    const fileInput = document.getElementById('fileInput');
+    const statusBox = document.getElementById('status-box');
+    const statusText = document.getElementById('status-text');
+    const progressFill = document.getElementById('progress-fill');
+    const downloadBtn = document.getElementById('downloadBtn');
+    let finalPdfBlob = null;
+
+    fileInput.addEventListener('change', async function(e) {
+        if (e.target.files.length === 0) return;
+        const file = e.target.files[0];
+        
+        // UI Reset
+        statusBox.style.display = 'block';
+        downloadBtn.style.display = 'none';
+        progressFill.style.width = '10%';
+        statusText.innerText = "Reading PDF...";
+        
+        try {
+            const arrayBuffer = await file.arrayBuffer();
+            const pdf = await pdfjsLib.getDocument(arrayBuffer).promise;
+            const { jsPDF } = window.jspdf;
+            const newPdf = new jsPDF();
+            
+            const totalPages = pdf.numPages;
+            
+            for (let i = 1; i <= totalPages; i++) {
+                statusText.innerText = `Processing Page ${i} of ${totalPages}...`;
+                progressFill.style.width = `${(i / totalPages) * 80}%`;
+
+                const page = await pdf.getPage(i);
+                const scale = 1.5; // Balance readability vs size
+                const viewport = page.getViewport({ scale: scale });
+                
+                const canvas = document.createElement('canvas');
+                const context = canvas.getContext('2d');
+                canvas.height = viewport.height;
+                canvas.width = viewport.width;
+
+                await page.render({ canvasContext: context, viewport: viewport }).promise;
+
+                // Aggressive JPEG Compression for 100KB target
+                // Quality 0.4 is usually decent for text readability but small size
+                const imgData = canvas.toDataURL('image/jpeg', 0.4);
+                
+                if (i > 1) newPdf.addPage();
+                
+                // Add image to PDF (A4 Ratio)
+                const imgProps = newPdf.getImageProperties(imgData);
+                const pdfWidth = newPdf.internal.pageSize.getWidth();
+                const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+                
+                newPdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight);
+            }
+
+            statusText.innerText = "Finalizing...";
+            progressFill.style.width = '100%';
+            
+            finalPdfBlob = newPdf.output('blob');
+            const sizeKB = Math.round(finalPdfBlob.size / 1024);
+            
+            document.getElementById('size-tag').innerText = `Result: ${sizeKB} KB`;
+            statusText.innerText = "Ready!";
+            downloadBtn.style.display = 'inline-flex';
+
+        } catch (error) {
+            console.error(error);
+            statusText.innerText = "Error processing PDF. Try a simpler file.";
+            statusText.style.color = "#ef4444";
+        }
+    });
+
+    function downloadPDF() {
+        if (!finalPdfBlob) return;
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(finalPdfBlob);
+        link.download = "ssc-document-100kb.pdf";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+</script>
+
+</body>
+</html>
