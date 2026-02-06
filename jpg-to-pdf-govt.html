@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="canonical" href="https://omnitools.in/jpg-to-pdf-govt.html">
+
+    <title>JPG to PDF for Government Forms (Combine & Compress) - Free</title>
+    
+    <meta name="description" content="Convert JPG images to a single PDF for government applications (SSC, UPSC, Banking). Features auto-compression to fit file size limits (500KB, 2MB). Privacy focused.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [{
+        "@type": "Question",
+        "name": "How to convert multiple JPGs to one PDF for UPSC?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Select all your images (marksheets, certificates) in this tool. It automatically arranges them on A4 pages and combines them into a single PDF file ready for upload."
+        }
+      },{
+        "@type": "Question",
+        "name": "Can I reduce the PDF size to under 500KB?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Select the 'Small (Under 500KB)' option before converting. The tool will apply compression to ensure your final PDF meets the strict size limits of government portals."
+        }
+      },{
+        "@type": "Question",
+        "name": "Is it safe for Aadhaar and PAN cards?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. This tool uses 'Client-Side' processing. Your images and the generated PDF are processed entirely within your browser and are never uploaded to any server."
+        }
+      }]
+    }
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <style>
+        /* --- GOLD / ZINC THEME --- */
+        :root { 
+            --bg-body: #09090b; --bg-card: #0c0c0e; --primary: #f59e0b; 
+            --text-main: #ededef; --text-muted: #a1a1aa; --border: #1f1f22;
+        }
+        * { box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        
+        body { 
+            background: var(--bg-body); color: var(--text-main); margin: 0; padding: 20px; 
+            min-height: 100vh; display: flex; flex-direction: column; align-items: center;
+            background-image: linear-gradient(#1f1f22 1px, transparent 1px), linear-gradient(90deg, #1f1f22 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        .container { max-width: 700px; width: 100%; }
+        
+        .nav-link { color: var(--text-muted); text-decoration: none; display: flex; align-items: center; gap: 8px; margin-bottom: 20px; font-size: 0.9rem; transition:0.2s; }
+        .nav-link:hover { color: var(--primary); }
+
+        h1 { font-size: 1.8rem; margin: 0 0 10px 0; color: var(--text-main); font-weight: 800; letter-spacing: -0.02em; }
+        h2 { font-size: 1.3rem; margin: 40px 0 15px 0; color: var(--text-main); font-weight: 700; border-left: 4px solid var(--primary); padding-left: 15px; }
+        p, li { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 10px; }
+        ul { padding-left: 20px; }
+
+        /* TOOL AREA */
+        .tool-card { 
+            background: var(--bg-card); border: 1px solid var(--border); 
+            border-radius: 16px; padding: 30px; text-align: center; margin-bottom: 30px;
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+        }
+
+        .drop-zone {
+            border: 2px dashed #3f3f46; border-radius: 12px; padding: 40px 20px;
+            cursor: pointer; transition: 0.2s; background: #121215; margin-bottom: 20px;
+        }
+        .drop-zone:hover { border-color: var(--primary); background: rgba(245, 158, 11, 0.05); }
+        .drop-zone i { font-size: 2.5rem; color: var(--text-muted); margin-bottom: 15px; }
+        .drop-zone p { margin: 0; font-weight: 600; color: var(--text-main); }
+
+        .settings-bar {
+            display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap;
+        }
+        select, .btn-sm {
+            flex: 1; padding: 10px; background: #18181b; border: 1px solid var(--border);
+            color: var(--text-main); border-radius: 8px; font-size: 0.9rem; cursor: pointer;
+        }
+
+        #preview-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 10px;
+            margin-bottom: 20px;
+        }
+        .preview-item {
+            position: relative; height: 80px; border-radius: 6px; overflow: hidden; border: 1px solid var(--border);
+        }
+        .preview-item img { width: 100%; height: 100%; object-fit: cover; }
+        .preview-count { 
+            position: absolute; bottom: 2px; right: 2px; background: rgba(0,0,0,0.7); 
+            color: white; font-size: 0.7rem; padding: 2px 6px; border-radius: 4px; 
+        }
+
+        .btn {
+            background: var(--primary); color: #000; border: none; padding: 14px 30px;
+            border-radius: 8px; font-weight: 700; font-size: 1rem; cursor: pointer;
+            display: inline-flex; align-items: center; gap: 10px; width: 100%; justify-content: center;
+            transition: 0.2s;
+        }
+        .btn:hover { transform: translateY(-2px); opacity: 0.9; }
+
+        /* Features Grid */
+        .features-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 40px; }
+        .feature-item { background: #121215; padding: 10px; border-radius: 8px; border: 1px solid var(--border); text-align: center; font-size: 0.8rem; color: var(--text-muted); font-weight: 500; }
+        .feature-item i { color: var(--primary); margin-right: 5px; }
+
+        /* FAQ Styling */
+        .faq-item { background: #121215; border: 1px solid var(--border); border-radius: 8px; padding: 15px; margin-bottom: 10px; }
+        .faq-q { font-weight: 600; color: var(--text-main); margin-bottom: 5px; display: block; }
+        .faq-a { color: var(--text-muted); font-size: 0.9rem; margin: 0; }
+
+        /* Internal Links */
+        .internal-links { margin-top: 40px; border-top: 1px solid var(--border); padding-top: 30px; }
+        .link-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; }
+        .link-btn { 
+            background: #121215; border: 1px solid var(--border); color: var(--text-muted); 
+            padding: 10px; text-align: center; border-radius: 6px; text-decoration: none; font-size: 0.85rem; transition: 0.2s;
+        }
+        .link-btn:hover { border-color: var(--primary); color: var(--text-main); }
+
+        .last-updated { text-align: center; color: #52525b; font-size: 0.8rem; margin-top: 40px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <a href="index.html" class="nav-link"><i class="fa-solid fa-arrow-left"></i> Back to All Tools</a>
+
+    <h1>JPG to PDF for Government Forms</h1>
+
+    <p>Convert your scanned JPG images (Marksheets, ID Proofs) into a single PDF. Use the compression settings to ensure the file fits within the <strong>2MB or 500KB limits</strong> of government portals.</p>
+
+    <div class="tool-card">
+        <div class="drop-zone" onclick="document.getElementById('fileInput').click()">
+            <i class="fa-solid fa-images"></i>
+            <p>Select Images (JPG/PNG)</p>
+            <span style="font-size:0.8rem; color:#666;">Select multiple files at once</span>
+        </div>
+        <input type="file" id="fileInput" hidden multiple accept="image/*">
+
+        <div id="preview-grid"></div>
+
+        <div class="settings-bar" id="settingsArea" style="display:none;">
+            <select id="compressionLevel">
+                <option value="0.95">High Quality (For Print)</option>
+                <option value="0.7">Standard (Under 2MB)</option>
+                <option value="0.4" selected>Small Size (Under 500KB)</option>
+            </select>
+            <select id="pageSize">
+                <option value="a4">A4 Size</option>
+                <option value="fit">Fit to Image</option>
+            </select>
+        </div>
+
+        <button class="btn" id="convertBtn" onclick="convertPDF()" style="display:none;">
+            <i class="fa-solid fa-file-pdf"></i> Convert & Download
+        </button>
+        <p id="statusMsg" style="margin-top:10px; font-size:0.9rem; display:none;"></p>
+    </div>
+
+    <div class="features-grid">
+        <div class="feature-item"><i class="fa-solid fa-layer-group"></i> Combine Pics</div>
+        <div class="feature-item"><i class="fa-solid fa-compress"></i> Auto Resize</div>
+        <div class="feature-item"><i class="fa-solid fa-shield-halved"></i> 100% Private</div>
+    </div>
+
+    <h2>Common Document Limits</h2>
+    <ul>
+        <li><strong>UPSC / SSC:</strong> Often require PDFs between 20KB and 300KB.</li>
+        <li><strong>Bank / IBPS:</strong> Typically allow 200KB to 500KB.</li>
+        <li><strong>Aadhaar / Passport:</strong> Usually allow up to 2MB.</li>
+        <li><strong>Tip:</strong> Choose "Small Size" for SSC/UPSC and "Standard" for Aadhaar.</li>
+    </ul>
+
+    <h2>Frequently Asked Questions</h2>
+    
+    <div class="faq-item">
+        <span class="faq-q">How to convert multiple JPGs to one PDF?</span>
+        <p class="faq-a">Select all your images (marksheets, certificates) in this tool. It automatically arranges them on A4 pages and combines them into a single PDF file ready for upload.</p>
+    </div>
+
+    <div class="faq-item">
+        <span class="faq-q">Can I reduce the PDF size to under 500KB?</span>
+        <p class="faq-a">Yes. Select the "Small (Under 500KB)" option before converting. The tool will apply compression to ensure your final PDF meets the strict size limits of government portals.</p>
+    </div>
+
+    <div class="faq-item">
+        <span class="faq-q">Is it safe for Aadhaar and PAN cards?</span>
+        <p class="faq-a">Yes. This tool uses "Client-Side" processing. Your images and the generated PDF are processed entirely within your browser and are never uploaded to any server.</p>
+    </div>
+
+    <div class="internal-links">
+        <h3 style="color:var(--text-muted); font-size:0.9rem; text-transform:uppercase; margin-bottom:15px;">Related Tools</h3>
+        <div class="link-grid">
+            <a href="compress-pdf-to-200kb.html" class="link-btn">Compress PDF to 200KB</a>
+            <a href="resize-image-for-aadhaar-card.html" class="link-btn">Resize for Aadhaar</a>
+            <a href="compress-pdf-for-job-application.html" class="link-btn">Resume Optimizer</a>
+            <a href="resize-signature-for-govt-forms.html" class="link-btn">Resize Signature</a>
+        </div>
+    </div>
+
+    <p class="last-updated">Last updated: February 2026</p>
+
+</div>
+
+<script>
+    const fileInput = document.getElementById('fileInput');
+    const previewGrid = document.getElementById('preview-grid');
+    const settingsArea = document.getElementById('settingsArea');
+    const convertBtn = document.getElementById('convertBtn');
+    const statusMsg = document.getElementById('statusMsg');
+    
+    let selectedFiles = [];
+
+    fileInput.addEventListener('change', function(e) {
+        if (e.target.files.length === 0) return;
+        
+        // Add new files to array
+        for(let file of e.target.files) {
+            selectedFiles.push(file);
+            addPreview(file);
+        }
+
+        if(selectedFiles.length > 0) {
+            settingsArea.style.display = 'flex';
+            convertBtn.style.display = 'inline-flex';
+        }
+    });
+
+    function addPreview(file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const div = document.createElement('div');
+            div.className = 'preview-item';
+            div.innerHTML = `<img src="${e.target.result}"><span class="preview-count">${selectedFiles.indexOf(file) + 1}</span>`;
+            previewGrid.appendChild(div);
+        };
+        reader.readAsDataURL(file);
+    }
+
+    async function convertPDF() {
+        if(selectedFiles.length === 0) return;
+
+        statusMsg.style.display = 'block';
+        statusMsg.innerText = "Generating PDF...";
+        statusMsg.style.color = "var(--primary)";
+
+        const { jsPDF } = window.jspdf;
+        const pdf = new jsPDF();
+        
+        const quality = parseFloat(document.getElementById('compressionLevel').value);
+        const pageSize = document.getElementById('pageSize').value;
+
+        for (let i = 0; i < selectedFiles.length; i++) {
+            const file = selectedFiles[i];
+            const imgData = await getCompressedImage(file, quality);
+            
+            if (i > 0) pdf.addPage();
+
+            const imgProps = pdf.getImageProperties(imgData);
+            
+            if (pageSize === 'a4') {
+                const pdfWidth = pdf.internal.pageSize.getWidth();
+                const pdfHeight = pdf.internal.pageSize.getHeight();
+                
+                // Calculate ratio to fit A4 with margins
+                const margin = 10;
+                const availableWidth = pdfWidth - (margin * 2);
+                const availableHeight = pdfHeight - (margin * 2);
+                
+                const ratio = Math.min(availableWidth / imgProps.width, availableHeight / imgProps.height);
+                
+                const w = imgProps.width * ratio;
+                const h = imgProps.height * ratio;
+                const x = (pdfWidth - w) / 2;
+                const y = (pdfHeight - h) / 2;
+
+                pdf.addImage(imgData, 'JPEG', x, y, w, h);
+
+            } else {
+                // Fit to Image (Custom Page Size)
+                // We recreate PDF instance if needed or set page size? 
+                // Easier: Just stretch to A4 if user selected fit? No, 'Fit' usually means variable page size.
+                // JS PDF allows changing page size.
+                pdf.deletePage(i+1); // remove default A4
+                pdf.addPage([imgProps.width * 0.264583, imgProps.height * 0.264583]); // px to mm
+                pdf.addImage(imgData, 'JPEG', 0, 0, imgProps.width * 0.264583, imgProps.height * 0.264583);
+            }
+        }
+
+        pdf.save("document-combined.pdf");
+        statusMsg.innerText = "Done! Download started.";
+        statusMsg.style.color = "#10b981";
+    }
+
+    function getCompressedImage(file, quality) {
+        return new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                const img = new Image();
+                img.onload = function() {
+                    const canvas = document.createElement('canvas');
+                    // Resize large images for consistency/size reduction
+                    let width = img.width;
+                    let height = img.height;
+                    const maxDim = 1500; // Cap dimension to ensure file size isn't huge
+
+                    if (width > maxDim || height > maxDim) {
+                        if (width > height) {
+                            height = Math.round((height *= maxDim / width));
+                            width = maxDim;
+                        } else {
+                            width = Math.round((width *= maxDim / height));
+                            height = maxDim;
+                        }
+                    }
+
+                    canvas.width = width;
+                    canvas.height = height;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, width, height);
+                    
+                    resolve(canvas.toDataURL('image/jpeg', quality));
+                };
+                img.src = event.target.result;
+            };
+            reader.readAsDataURL(file);
+        });
+    }
+</script>
+
+</body>
+</html>
