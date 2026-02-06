@@ -55,6 +55,14 @@ const toolsDB = [
         "desc": "Resize photo to 50KB (High Quality) for SSC exams.", 
         "tag": "SSC" 
     },
+    { 
+        "name": "Resize to 100KB (SSC)", 
+        "url": "resize-image-100kb-for-ssc-form", 
+        "cat": "image-resize", 
+        "icon": "fa-image", 
+        "desc": "Resize photo to 100KB (Max Quality) for SSC exams.", 
+        "tag": "SSC" 
+    },
     // =========================================
     // CATEGORY 2: SIGNATURE RESIZE (High Intent)
     // =========================================
