@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -16,9 +16,35 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* --- 2. LUXURY GOLD THEME VARIABLES --- */
+        /* --- LUXURY THEME VARIABLES --- */
         :root { 
-            /* DARK MODE (DEFAULT) */
+            /* LIGHT MODE (DEFAULT) */
+            --bg-body: #ffffff;
+            --bg-sidebar: #f8fafc; 
+            --bg-card: #ffffff;
+            --bg-card-hover: #ffffeb; /* Slight warm tint for hover in light mode */
+            --bg-header: rgba(255, 255, 255, 0.8);
+
+            --border-subtle: #e2e8f0; 
+            --border-hover: #cbd5e1;  
+            --input-bg: #f8fafc;
+
+            --primary: #f59e0b;       /* Amber/Gold */
+            --accent-glow: rgba(245, 158, 11, 0.2); 
+
+            --text-main: #0f172a;      
+            --text-muted: #64748b;     
+            
+            --spotlight: radial-gradient(circle at 50% -20%, rgba(245, 158, 11, 0.05), transparent 60%);
+            --grid-color: #f1f5f9;
+
+            --sidebar-width: 270px;
+            --radius-md: 12px;
+            --transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* DARK MODE OVERRIDES */
+        [data-theme="dark"] {
             --bg-body: #09090b;        
             --bg-sidebar: #09090b;     
             --bg-card: #0c0c0e;        
@@ -29,39 +55,11 @@
             --border-hover: #3f3f46;
             --input-bg: #09090b;
             
-            /* THE "EXPENSIVE" GOLD COLOR */
-            --primary: #f59e0b;       /* Amber/Gold */
-            --accent-glow: rgba(245, 158, 11, 0.4); 
-            
             --text-main: #ededef;
             --text-muted: #a1a1aa;
             
-            /* Gold Spotlight instead of Blue */
             --spotlight: radial-gradient(circle at 50% -20%, rgba(245, 158, 11, 0.08), transparent 70%);
             --grid-color: #1f1f22;
-
-            --sidebar-width: 270px;
-            --radius-md: 12px;
-            --transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
-        }
-
-        /* LIGHT MODE OVERRIDES */
-        [data-theme="light"] {
-            --bg-body: #ffffff;
-            --bg-sidebar: #f8fafc; 
-            --bg-card: #ffffff;
-            --bg-card-hover: #ffffeb;
-            --bg-header: rgba(255, 255, 255, 0.8);
-
-            --border-subtle: #e2e8f0; 
-            --border-hover: #cbd5e1;  
-            --input-bg: #f8fafc;
-
-            --text-main: #0f172a;      
-            --text-muted: #64748b;     
-            
-            --spotlight: radial-gradient(circle at 50% -20%, rgba(245, 158, 11, 0.05), transparent 60%);
-            --grid-color: #f1f5f9;
         }
         
         * { box-sizing: border-box; margin: 0; padding: 0; outline: none; -webkit-tap-highlight-color: transparent; }
@@ -154,6 +152,7 @@
             border: 1px solid var(--border-subtle); background: var(--input-bg);
             color: var(--text-muted); transition: var(--transition);
             display: flex; align-items: center; justify-content: center;
+            width: 36px; height: 36px;
         }
         .theme-toggle:hover { color: var(--text-main); border-color: var(--text-muted); }
 
@@ -296,7 +295,7 @@
             </div>
 
             <div class="theme-toggle" onclick="toggleTheme()" title="Switch Theme">
-                <i id="theme-icon" class="fa-solid fa-sun"></i>
+                <i id="theme-icon" class="fa-solid fa-moon"></i>
             </div>
         </header>
 
@@ -407,7 +406,6 @@
             const container = document.getElementById('recents-container');
             const recents = JSON.parse(localStorage.getItem('omni_recents')) || [];
             
-            // Need the DB to look up names/icons
             const db = (typeof toolsDB !== 'undefined') ? toolsDB : [];
             if(recents.length === 0 || db.length === 0) {
                 container.style.display = 'none';
@@ -448,28 +446,16 @@
             const icon = document.getElementById('theme-icon');
             const current = html.getAttribute('data-theme');
             
-            if (current === 'dark') {
-                html.setAttribute('data-theme', 'light');
-                icon.className = 'fa-solid fa-moon';
-                localStorage.setItem('theme', 'light');
-            } else {
+            if (current === 'light') {
                 html.setAttribute('data-theme', 'dark');
                 icon.className = 'fa-solid fa-sun';
                 localStorage.setItem('theme', 'dark');
+            } else {
+                html.setAttribute('data-theme', 'light');
+                icon.className = 'fa-solid fa-moon';
+                localStorage.setItem('theme', 'light');
             }
         }
-
-        (function() {
-            const saved = localStorage.getItem('theme');
-            const icon = document.getElementById('theme-icon');
-            if (saved === 'light') {
-                document.documentElement.setAttribute('data-theme', 'light');
-                if(icon) icon.className = 'fa-solid fa-moon';
-            } else {
-                document.documentElement.setAttribute('data-theme', 'dark');
-                if(icon) icon.className = 'fa-solid fa-sun';
-            }
-        })();
 
         // --- 4. ADS ---
         function loadAds() {
@@ -663,6 +649,16 @@
         });
 
         // --- INIT ---
+        (function() {
+            const saved = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', saved);
+            
+            const icon = document.getElementById('theme-icon');
+            if(icon) {
+                icon.className = saved === 'dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+            }
+        })();
+
         loadAds(); 
         
         // Load Database then Init Logic
