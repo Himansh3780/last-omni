@@ -79,6 +79,46 @@ const toolsDB = [
         "desc": "Resize photo to 50KB (Square 350px) for UPSC exams.", 
         "tag": "UPSC" 
     },
+    { 
+        "name": "Resize to 20KB (Railway)", 
+        "url": "resize-image-20kb-for-railway-form", 
+        "cat": "image-resize", 
+        "icon": "fa-train", 
+        "desc": "Resize photo to 20KB for RRB NTPC, ALP & Group D.", 
+        "tag": "RRB" 
+    },
+    { 
+        "name": "Resize for Aadhaar", 
+        "url": "resize-image-for-aadhaar-card", 
+        "cat": "image-resize", 
+        "icon": "fa-fingerprint", 
+        "desc": "Resize photo/docs for Aadhaar card update.", 
+        "tag": "UIDAI" 
+    },
+    { 
+        "name": "Resize for PAN Card", 
+        "url": "resize-image-for-pan-card", 
+        "cat": "image-resize", 
+        "icon": "fa-address-card", 
+        "desc": "Resize photo to 213x213px (30KB) for PAN application.", 
+        "tag": "NSDL" 
+    },
+    { 
+        "name": "Passport Photo Maker", 
+        "url": "resize-passport-photo", 
+        "cat": "image-resize", 
+        "icon": "fa-id-badge", 
+        "desc": "Convert any image to standard 3.5x4.5cm passport size.", 
+        "tag": "FREE" 
+    },
+    { 
+        "name": "Resize for Driving License", 
+        "url": "resize-image-for-driving-license", 
+        "cat": "image-resize", 
+        "icon": "fa-id-card-clip", 
+        "desc": "Resize photo/signature to 10-20KB for DL/LL.", 
+        "tag": "RTO" 
+    },
     // =========================================
     // CATEGORY 2: SIGNATURE RESIZE (High Intent)
     // =========================================
