@@ -1,0 +1,63 @@
+/* --- LUXURY THEME VARIABLES --- */
+:root { 
+    /* LIGHT MODE (DEFAULT) */
+    --bg-body: #ffffff;
+    --bg-sidebar: #f8fafc; 
+    --bg-card: #ffffff;
+    --bg-card-hover: #ffffeb;
+    --bg-header: rgba(255, 255, 255, 0.8);
+
+    --border-subtle: #e2e8f0; 
+    --border-hover: #cbd5e1;  
+    --input-bg: #f8fafc;
+
+    --primary: #f59e0b;       /* Amber/Gold */
+    --accent-glow: rgba(245, 158, 11, 0.2); 
+
+    --text-main: #0f172a;      
+    --text-muted: #64748b;     
+    
+    --spotlight: radial-gradient(circle at 50% -20%, rgba(245, 158, 11, 0.05), transparent 60%);
+    --grid-color: #f1f5f9;
+
+    --sidebar-width: 270px;
+    --radius-md: 12px;
+    --transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+/* DARK MODE OVERRIDES */
+[data-theme="dark"] {
+    --bg-body: #09090b;        
+    --bg-sidebar: #09090b;     
+    --bg-card: #0c0c0e;        
+    --bg-card-hover: #121215;  
+    --bg-header: rgba(9, 9, 11, 0.7);
+    
+    --border-subtle: #1f1f22;  
+    --border-hover: #3f3f46;
+    --input-bg: #09090b;
+    
+    --text-main: #ededef;
+    --text-muted: #a1a1aa;
+    
+    --spotlight: radial-gradient(circle at 50% -20%, rgba(245, 158, 11, 0.08), transparent 70%);
+    --grid-color: #1f1f22;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; outline: none; -webkit-tap-highlight-color: transparent; }
+
+body { 
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-body);
+    color: var(--text-main);
+    height: 100vh;
+    display: flex;
+    overflow: hidden;
+    background-image: 
+        linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
+    background-size: 50px 50px;
+    transition: var(--transition);
+}
+
+/* ... (Your other CSS stays here) ... */
