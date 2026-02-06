@@ -175,8 +175,70 @@ const toolsDB = [
     // =========================================
     // CATEGORY 3: PDF TOOLS (Evergreen)
     // =========================================
-    // Add your tools here...
-
+     { 
+        "name": "Compress PDF 100KB", 
+        "url": "compress-pdf-to-100kb-for-ssc", 
+        "cat": "pdf", 
+        "icon": "fa-file-pdf", 
+        "desc": "Reduce PDF size to 100KB for SSC/Govt uploads.", 
+        "tag": "SSC" 
+    },
+    { 
+        "name": "Compress PDF 200KB", 
+        "url": "compress-pdf-to-200kb", 
+        "cat": "pdf", 
+        "icon": "fa-file-zipper", 
+        "desc": "Compress PDF to 200KB for SSC, UPSC & PSC.", 
+        "tag": "HOT" 
+    },
+    { 
+        "name": "Compress PDF (UPSC)", 
+        "url": "compress-pdf-for-upsc", 
+        "cat": "pdf", 
+        "icon": "fa-file-shield", 
+        "desc": "Compress PDF to 300KB for UPSC Civil Services.", 
+        "tag": "UPSC" 
+    },
+    { 
+        "name": "Compress PDF (Railway)", 
+        "url": "compress-pdf-for-railway-form", 
+        "cat": "pdf", 
+        "icon": "fa-train", 
+        "desc": "Compress PDF to 300KB for RRB (NTPC/ALP).", 
+        "tag": "RRB" 
+    },
+    { 
+        "name": "Compress PDF (Govt)", 
+        "url": "compress-pdf-for-govt-forms", 
+        "cat": "pdf", 
+        "icon": "fa-file-invoice", 
+        "desc": "Universal PDF compressor for Government applications.", 
+        "tag": "ALL" 
+    },
+    { 
+        "name": "Compress PDF (Resume)", 
+        "url": "compress-pdf-for-job-application", 
+        "cat": "pdf", 
+        "icon": "fa-briefcase", 
+        "desc": "Optimize PDF resume/CV for job portals (LinkedIn/Naukri).", 
+        "tag": "JOB" 
+    },
+    { 
+        "name": "Compress PDF (Aadhaar)", 
+        "url": "compress-pdf-for-aadhaar-upload", 
+        "cat": "pdf", 
+        "icon": "fa-fingerprint", 
+        "desc": "Compress PDF to 2MB for UIDAI document update.", 
+        "tag": "UIDAI" 
+    },
+    { 
+        "name": "High Quality PDF Compress", 
+        "url": "compress-pdf-no-quality-loss", 
+        "cat": "pdf", 
+        "icon": "fa-file-circle-check", 
+        "desc": "Reduce PDF size without losing quality (HD).", 
+        "tag": "HD" 
+    },
 
     // =========================================
     // CATEGORY 4: PASSWORD TOOLS (Scalable)
