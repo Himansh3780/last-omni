@@ -47,6 +47,14 @@ const toolsDB = [
         "desc": "Resize photo to 20KB for SSC CGL/CHSL forms.", 
         "tag": "SSC" 
     },
+    { 
+        "name": "Resize to 50KB (SSC)", 
+        "url": "resize-image-50kb-for-ssc-form", 
+        "cat": "image-resize", 
+        "icon": "fa-id-card", 
+        "desc": "Resize photo to 50KB (High Quality) for SSC exams.", 
+        "tag": "SSC" 
+    },
     // =========================================
     // CATEGORY 2: SIGNATURE RESIZE (High Intent)
     // =========================================
