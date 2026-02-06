@@ -100,7 +100,7 @@ const toolsDB = [
         "url": "resize-image-for-pan-card", 
         "cat": "image-resize", 
         "icon": "fa-address-card", 
-        "desc": "Resize photo to 213x213px (30KB) for PAN application.", 
+        "desc": "Resize photo to 30KB for PAN application.", 
         "tag": "NSDL" 
     },
     { 
