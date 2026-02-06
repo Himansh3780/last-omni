@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="canonical" href="https://omnitools.in/pdf-to-jpg-for-upsc-documents.html">
+
+    <title>PDF to JPG Converter for UPSC Documents (High Clarity)</title>
+    
+    <meta name="description" content="Convert PDF certificates to high-quality JPG images for UPSC Civil Services, NDA, & CDS applications. Extract pages from PDF for editing or resizing.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [{
+        "@type": "Question",
+        "name": "Can I upload JPG documents for UPSC?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "UPSC OTR generally requires documents in PDF format. However, converting to JPG is useful if you need to crop, edit, or resize a document before converting it back to PDF for the final upload."
+        }
+      },{
+        "@type": "Question",
+        "name": "Does converting PDF to JPG lose quality?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Not with this tool. We use 'High-Density Rendering' (Scale 2.0) to ensure that the converted image retains the sharpness of the original text and stamps."
+        }
+      },{
+        "@type": "Question",
+        "name": "Is it safe for sensitive certificates?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. This converter operates 100% in your browser. Your degree, caste certificate, or marksheets are processed locally and never sent to any server."
+        }
+      }]
+    }
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
+    <style>
+        /* --- GOLD / ZINC THEME --- */
+        :root { 
+            --bg-body: #09090b; --bg-card: #0c0c0e; --primary: #f59e0b; 
+            --text-main: #ededef; --text-muted: #a1a1aa; --border: #1f1f22;
+        }
+        * { box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        
+        body { 
+            background: var(--bg-body); color: var(--text-main); margin: 0; padding: 20px; 
+            min-height: 100vh; display: flex; flex-direction: column; align-items: center;
+            background-image: linear-gradient(#1f1f22 1px, transparent 1px), linear-gradient(90deg, #1f1f22 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        .container { max-width: 700px; width: 100%; }
+        
+        .nav-link { color: var(--text-muted); text-decoration: none; display: flex; align-items: center; gap: 8px; margin-bottom: 20px; font-size: 0.9rem; transition:0.2s; }
+        .nav-link:hover { color: var(--primary); }
+
+        h1 { font-size: 1.8rem; margin: 0 0 10px 0; color: var(--text-main); font-weight: 800; letter-spacing: -0.02em; }
+        h2 { font-size: 1.3rem; margin: 40px 0 15px 0; color: var(--text-main); font-weight: 700; border-left: 4px solid var(--primary); padding-left: 15px; }
+        p, li { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 10px; }
+        ul { padding-left: 20px; }
+
+        /* TOOL AREA */
+        .tool-card { 
+            background: var(--bg-card); border: 1px solid var(--border); 
+            border-radius: 16px; padding: 30px; text-align: center; margin-bottom: 30px;
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+        }
+
+        .drop-zone {
+            border: 2px dashed #3f3f46; border-radius: 12px; padding: 40px 20px;
+            cursor: pointer; transition: 0.2s; background: #121215; margin-bottom: 20px;
+        }
+        .drop-zone:hover { border-color: var(--primary); background: rgba(245, 158, 11, 0.05); }
+        .drop-zone i { font-size: 2.5rem; color: var(--text-muted); margin-bottom: 15px; }
+        .drop-zone p { margin: 0; font-weight: 600; color: var(--text-main); }
+
+        #results-area { display: none; margin-top: 20px; }
+        
+        .page-card {
+            background: #18181b; border: 1px solid var(--border); border-radius: 8px;
+            padding: 15px; margin-bottom: 15px; text-align: center;
+        }
+        .page-card img { max-width: 100%; border-radius: 4px; border: 1px solid #333; margin-bottom: 10px; }
+        
+        .btn {
+            background: var(--primary); color: #000; border: none; padding: 10px 20px;
+            border-radius: 6px; font-weight: 700; font-size: 0.9rem; cursor: pointer;
+            display: inline-flex; align-items: center; gap: 8px; margin-top: 5px; text-decoration: none;
+            transition: 0.2s;
+        }
+        .btn:hover { transform: translateY(-2px); opacity: 0.9; }
+
+        /* Features Grid */
+        .features-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 40px; }
+        .feature-item { background: #121215; padding: 10px; border-radius: 8px; border: 1px solid var(--border); text-align: center; font-size: 0.8rem; color: var(--text-muted); font-weight: 500; }
+        .feature-item i { color: var(--primary); margin-right: 5px; }
+
+        /* FAQ Styling */
+        .faq-item { background: #121215; border: 1px solid var(--border); border-radius: 8px; padding: 15px; margin-bottom: 10px; }
+        .faq-q { font-weight: 600; color: var(--text-main); margin-bottom: 5px; display: block; }
+        .faq-a { color: var(--text-muted); font-size: 0.9rem; margin: 0; }
+
+        /* Internal Links */
+        .internal-links { margin-top: 40px; border-top: 1px solid var(--border); padding-top: 30px; }
+        .link-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; }
+        .link-btn { 
+            background: #121215; border: 1px solid var(--border); color: var(--text-muted); 
+            padding: 10px; text-align: center; border-radius: 6px; text-decoration: none; font-size: 0.85rem; transition: 0.2s;
+        }
+        .link-btn:hover { border-color: var(--primary); color: var(--text-main); }
+
+        .last-updated { text-align: center; color: #52525b; font-size: 0.8rem; margin-top: 40px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <a href="index.html" class="nav-link"><i class="fa-solid fa-arrow-left"></i> Back to All Tools</a>
+
+    <h1>PDF to JPG for UPSC Documents</h1>
+
+    <p>Need to extract an image from a PDF certificate? Convert your UPSC documents (Degree, Caste Certificate, Marksheets) into high-quality JPGs for editing or resizing.</p>
+
+    <div class="tool-card">
+        <div class="drop-zone" onclick="document.getElementById('fileInput').click()">
+            <i class="fa-solid fa-file-pdf"></i>
+            <p>Upload PDF File</p>
+            <span style="font-size:0.8rem; color:#666;">Supports Multi-page PDFs</span>
+        </div>
+        <input type="file" id="fileInput" hidden accept="application/pdf">
+
+        <div id="status-msg" style="margin-top:15px; color:var(--primary); font-size:0.9rem;"></div>
+
+        <div id="results-area">
+            </div>
+    </div>
+
+    <div class="features-grid">
+        <div class="feature-item"><i class="fa-solid fa-eye"></i> Clear Text</div>
+        <div class="feature-item"><i class="fa-solid fa-images"></i> Extract Pages</div>
+        <div class="feature-item"><i class="fa-solid fa-user-shield"></i> Private</div>
+    </div>
+
+    <h2>Why convert PDF to JPG?</h2>
+    <ul>
+        <li><strong>Editing:</strong> It's easier to crop extra white space from a JPG than a PDF.</li>
+        <li><strong>Resizing:</strong> If you need to change the dimensions (e.g., width 500px), converting to image first is necessary.</li>
+        <li><strong>Compatibility:</strong> Some older forms or specific fields (like Photo ID) may request JPG.</li>
+    </ul>
+
+    <h2>How to Convert PDF to Image</h2>
+    <ol>
+        <li>Click "Upload PDF File" and choose your document.</li>
+        <li>The tool processes the PDF and extracts each page.</li>
+        <li>It renders them as high-definition JPG images.</li>
+        <li>Download the specific page you need.</li>
+    </ol>
+
+    <h2>Frequently Asked Questions</h2>
+    
+    <div class="faq-item">
+        <span class="faq-q">Can I upload JPG documents for UPSC?</span>
+        <p class="faq-a">UPSC OTR generally requires documents in PDF format. However, converting to JPG is useful if you need to crop, edit, or resize a document before converting it back to PDF for the final upload.</p>
+    </div>
+
+    <div class="faq-item">
+        <span class="faq-q">Does converting PDF to JPG lose quality?</span>
+        <p class="faq-a">Not with this tool. We use "High-Density Rendering" (Scale 2.0) to ensure that the converted image retains the sharpness of the original text and stamps.</p>
+    </div>
+
+    <div class="faq-item">
+        <span class="faq-q">Is it safe for sensitive certificates?</span>
+        <p class="faq-a">Yes. This converter operates 100% in your browser. Your degree, caste certificate, or marksheets are processed locally and never sent to any server.</p>
+    </div>
+
+    <div class="internal-links">
+        <h3 style="color:var(--text-muted); font-size:0.9rem; text-transform:uppercase; margin-bottom:15px;">Related Tools</h3>
+        <div class="link-grid">
+            <a href="compress-pdf-for-upsc.html" class="link-btn">Compress PDF (UPSC)</a>
+            <a href="resize-image-20kb-for-upsc-form.html" class="link-btn">Resize Photo (UPSC)</a>
+            <a href="resize-signature-20kb-for-upsc.html" class="link-btn">Resize Signature (UPSC)</a>
+            <a href="pdf-to-jpg-for-ssc-form.html" class="link-btn">PDF to JPG (SSC)</a>
+        </div>
+    </div>
+
+    <p class="last-updated">Last updated: February 2026</p>
+
+</div>
+
+<script>
+    // Set worker
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+    const fileInput = document.getElementById('fileInput');
+    const resultsArea = document.getElementById('results-area');
+    const statusMsg = document.getElementById('status-msg');
+
+    fileInput.addEventListener('change', async function(e) {
+        if (e.target.files.length === 0) return;
+        
+        const file = e.target.files[0];
+        resultsArea.style.display = 'block';
+        resultsArea.innerHTML = '';
+        statusMsg.innerText = "Converting PDF pages...";
+
+        try {
+            const arrayBuffer = await file.arrayBuffer();
+            const pdf = await pdfjsLib.getDocument(arrayBuffer).promise;
+            
+            statusMsg.innerText = `Found ${pdf.numPages} page(s). Rendering...`;
+
+            for (let i = 1; i <= pdf.numPages; i++) {
+                const page = await pdf.getPage(i);
+                
+                // Scale 2.0 = HD Quality
+                const viewport = page.getViewport({ scale: 2.0 });
+                
+                const canvas = document.createElement('canvas');
+                const context = canvas.getContext('2d');
+                canvas.height = viewport.height;
+                canvas.width = viewport.width;
+
+                await page.render({ canvasContext: context, viewport: viewport }).promise;
+
+                // Convert to JPG
+                const imgData = canvas.toDataURL('image/jpeg', 0.9);
+                
+                // Create Output Element
+                const card = document.createElement('div');
+                card.className = 'page-card';
+                card.innerHTML = `
+                    <div style="color:#aaa; font-size:0.8rem; margin-bottom:5px;">Page ${i}</div>
+                    <img src="${imgData}" alt="Page ${i}">
+                    <br>
+                    <a href="${imgData}" download="upsc-doc-page-${i}.jpg" class="btn">
+                        <i class="fa-solid fa-download"></i> Download JPG
+                    </a>
+                `;
+                resultsArea.appendChild(card);
+            }
+            statusMsg.innerText = "Done! You can download the images below.";
+            statusMsg.style.color = "#10b981";
+
+        } catch (error) {
+            console.error(error);
+            statusMsg.innerText = "Error reading PDF. Please try a different file.";
+            statusMsg.style.color = "#ef4444";
+        }
+    });
+</script>
+
+</body>
+</html>
