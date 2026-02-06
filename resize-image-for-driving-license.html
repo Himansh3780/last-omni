@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="canonical" href="https://omnitools.in/resize-image-for-driving-license.html">
+
+    <title>Resize Image for Driving License Application (10KB - 20KB)</title>
+    
+    <meta name="description" content="Resize photo and signature to 10-20KB for Driving License (Parivahan) application. Free online tool to compress images for DL/LL upload instantly.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [{
+        "@type": "Question",
+        "name": "What is the photo size for Driving License upload?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For the Parivahan Sewa portal, both the photograph and signature must be strictly between 10KB and 20KB."
+        }
+      },{
+        "@type": "Question",
+        "name": "How to reduce photo size to 20KB for DL?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Simply upload your image to this tool. It automatically adjusts dimensions and compresses the file to fall safely within the 10-20KB range."
+        }
+      },{
+        "@type": "Question",
+        "name": "Can I resize my signature for DL application here?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes! This tool works for both your Passport Photo and your Scanned Signature, as both require the same 20KB limit."
+        }
+      }]
+    }
+    </script>
+
+    <style>
+        /* --- GOLD / ZINC THEME --- */
+        :root { 
+            --bg-body: #09090b; --bg-card: #0c0c0e; --primary: #f59e0b; 
+            --text-main: #ededef; --text-muted: #a1a1aa; --border: #1f1f22;
+        }
+        * { box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        
+        body { 
+            background: var(--bg-body); color: var(--text-main); margin: 0; padding: 20px; 
+            min-height: 100vh; display: flex; flex-direction: column; align-items: center;
+            background-image: linear-gradient(#1f1f22 1px, transparent 1px), linear-gradient(90deg, #1f1f22 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        .container { max-width: 700px; width: 100%; }
+        
+        .nav-link { color: var(--text-muted); text-decoration: none; display: flex; align-items: center; gap: 8px; margin-bottom: 20px; font-size: 0.9rem; transition:0.2s; }
+        .nav-link:hover { color: var(--primary); }
+
+        h1 { font-size: 1.8rem; margin: 0 0 10px 0; color: var(--text-main); font-weight: 800; letter-spacing: -0.02em; }
+        h2 { font-size: 1.3rem; margin: 40px 0 15px 0; color: var(--text-main); font-weight: 700; border-left: 4px solid var(--primary); padding-left: 15px; }
+        p, li { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 10px; }
+        ul { padding-left: 20px; }
+
+        /* TOOL AREA */
+        .tool-card { 
+            background: var(--bg-card); border: 1px solid var(--border); 
+            border-radius: 16px; padding: 30px; text-align: center; margin-bottom: 30px;
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+        }
+
+        .drop-zone {
+            border: 2px dashed #3f3f46; border-radius: 12px; padding: 40px 20px;
+            cursor: pointer; transition: 0.2s; background: #121215; margin-bottom: 20px;
+        }
+        .drop-zone:hover { border-color: var(--primary); background: rgba(245, 158, 11, 0.05); }
+        .drop-zone i { font-size: 2.5rem; color: var(--text-muted); margin-bottom: 15px; }
+        .drop-zone p { margin: 0; font-weight: 600; color: var(--text-main); }
+
+        #preview-container { display: none; margin-top: 20px; border-top: 1px solid var(--border); padding-top: 20px; }
+        #preview-img { max-width: 200px; border: 4px solid var(--border); border-radius: 8px; }
+        
+        .stat-box { 
+            background: #18181b; padding: 12px; border-radius: 8px; margin: 15px 0; 
+            display: inline-block; border: 1px solid var(--border);
+        }
+        .success-text { color: #10b981; font-weight: 700; }
+
+        .btn {
+            background: var(--primary); color: #000; border: none; padding: 14px 30px;
+            border-radius: 8px; font-weight: 700; font-size: 1rem; cursor: pointer;
+            display: inline-flex; align-items: center; gap: 10px; width: 100%; justify-content: center;
+            transition: 0.2s;
+        }
+        .btn:hover { transform: translateY(-2px); opacity: 0.9; }
+
+        /* Features Grid */
+        .features-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 40px; }
+        .feature-item { background: #121215; padding: 10px; border-radius: 8px; border: 1px solid var(--border); text-align: center; font-size: 0.8rem; color: var(--text-muted); font-weight: 500; }
+        .feature-item i { color: var(--primary); margin-right: 5px; }
+
+        /* FAQ Styling */
+        .faq-item { background: #121215; border: 1px solid var(--border); border-radius: 8px; padding: 15px; margin-bottom: 10px; }
+        .faq-q { font-weight: 600; color: var(--text-main); margin-bottom: 5px; display: block; }
+        .faq-a { color: var(--text-muted); font-size: 0.9rem; margin: 0; }
+
+        /* Internal Links */
+        .internal-links { margin-top: 40px; border-top: 1px solid var(--border); padding-top: 30px; }
+        .link-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; }
+        .link-btn { 
+            background: #121215; border: 1px solid var(--border); color: var(--text-muted); 
+            padding: 10px; text-align: center; border-radius: 6px; text-decoration: none; font-size: 0.85rem; transition: 0.2s;
+        }
+        .link-btn:hover { border-color: var(--primary); color: var(--text-main); }
+
+        .last-updated { text-align: center; color: #52525b; font-size: 0.8rem; margin-top: 40px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <a href="index.html" class="nav-link"><i class="fa-solid fa-arrow-left"></i> Back to All Tools</a>
+
+    <h1>Resize Image for Driving License (10KB - 20KB)</h1>
+
+    <p>The Parivahan Sarathi portal strictly requires photo and signature files to be between <strong>10KB and 20KB</strong>. This tool compresses your files to this exact range instantly.</p>
+
+    <div class="tool-card">
+        <div class="drop-zone" onclick="document.getElementById('fileInput').click()">
+            <i class="fa-solid fa-id-card-clip"></i>
+            <p>Upload Photo or Signature</p>
+            <span style="font-size:0.8rem; color:#666;">JPG, JPEG supported</span>
+        </div>
+        <input type="file" id="fileInput" hidden accept="image/*">
+
+        <div id="preview-container">
+            <p style="color:var(--text-muted); font-size:0.9rem;">Optimized Result:</p>
+            <img id="preview-img">
+            
+            <div class="stat-box">
+                <div id="size-text" class="success-text">Calculating...</div>
+                <div style="font-size:0.8rem; color:#666; margin-top:4px;">Parivahan Ready</div>
+            </div>
+
+            <button class="btn" id="downloadBtn" onclick="downloadImage()">
+                <i class="fa-solid fa-download"></i> Download Image
+            </button>
+        </div>
+    </div>
+
+    <div class="features-grid">
+        <div class="feature-item"><i class="fa-solid fa-car"></i> DL/LL Ready</div>
+        <div class="feature-item"><i class="fa-solid fa-compress"></i> 10-20KB Fix</div>
+        <div class="feature-item"><i class="fa-solid fa-mobile-screen"></i> Works on Phone</div>
+    </div>
+
+    <h2>Driving License Photo Requirements (Parivahan)</h2>
+    <ul>
+        <li><strong>File Size:</strong> Strictly between 10KB and 20KB.</li>
+        <li><strong>Format:</strong> JPEG / JPG only.</li>
+        <li><strong>Content:</strong> Clear recent passport photo or scanned signature.</li>
+        <li><strong>Dimensions:</strong> Standard 3.5cm x 4.5cm (approx 350x450px).</li>
+    </ul>
+
+    <h2>How to Resize Photo for Driving License</h2>
+    <ol>
+        <li>Click the upload box and select your photo or signature.</li>
+        <li>The tool automatically compresses it to fit the 10KB-20KB limit.</li>
+        <li>It converts the file to the required JPG format.</li>
+        <li>Download and upload to the Parivahan portal.</li>
+    </ol>
+
+    <h2>Frequently Asked Questions</h2>
+    
+    <div class="faq-item">
+        <span class="faq-q">What is the photo size for Driving License upload?</span>
+        <p class="faq-a">For the Parivahan Sewa portal, both the photograph and signature must be strictly between 10KB and 20KB.</p>
+    </div>
+
+    <div class="faq-item">
+        <span class="faq-q">How to reduce photo size to 20KB for DL?</span>
+        <p class="faq-a">Simply upload your image to this tool. It automatically adjusts dimensions and compresses the file to fall safely within the 10-20KB range.</p>
+    </div>
+
+    <div class="faq-item">
+        <span class="faq-q">Can I resize my signature for DL application here?</span>
+        <p class="faq-a">Yes! This tool works for both your Passport Photo and your Scanned Signature, as both require the same 20KB limit.</p>
+    </div>
+
+    <div class="internal-links">
+        <h3 style="color:var(--text-muted); font-size:0.9rem; text-transform:uppercase; margin-bottom:15px;">Related Tools</h3>
+        <div class="link-grid">
+            <a href="resize-image-20kb-for-ssc-form.html" class="link-btn">Resize Image for SSC</a>
+            <a href="resize-image-for-pan-card.html" class="link-btn">Resize for PAN Card</a>
+            <a href="resize-passport-photo.html" class="link-btn">Passport Photo Maker</a>
+            <a href="jpg-to-pdf-govt.html" class="link-btn">Convert Documents to PDF</a>
+        </div>
+    </div>
+
+    <p class="last-updated">Last updated: February 2026</p>
+
+</div>
+
+<script>
+    // --- DRIVING LICENSE CONFIG ---
+    const CONFIG = {
+        maxSizeKB: 20,      // Max allowed by Parivahan
+        minSizeKB: 10,      // Min allowed by Parivahan
+        width: 350,         // Standard 3.5cm
+        height: 450,        // Standard 4.5cm
+        filename: "dl-photo-optimized.jpg"
+    };
+
+    const fileInput = document.getElementById('fileInput');
+    const previewContainer = document.getElementById('preview-container');
+    const previewImg = document.getElementById('preview-img');
+    const sizeText = document.getElementById('size-text');
+    let downloadUrl = "";
+
+    fileInput.addEventListener('change', function(e) {
+        if (e.target.files.length === 0) return;
+        processImage(e.target.files[0]);
+    });
+
+    function processImage(file) {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+            const img = new Image();
+            img.onload = function() {
+                const canvas = document.createElement('canvas');
+                canvas.width = CONFIG.width;
+                canvas.height = CONFIG.height;
+                const ctx = canvas.getContext('2d');
+
+                ctx.fillStyle = "#FFFFFF";
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                ctx.drawImage(img, 0, 0, CONFIG.width, CONFIG.height);
+
+                // Aggressive start because 20KB is very small
+                let quality = 0.8;
+                let dataUrl = canvas.toDataURL('image/jpeg', quality);
+                
+                const compress = () => {
+                    let sizeKB = Math.round((dataUrl.length * 3 / 4) / 1024);
+                    
+                    if (sizeKB > CONFIG.maxSizeKB && quality > 0.1) {
+                        quality -= 0.05;
+                        dataUrl = canvas.toDataURL('image/jpeg', quality);
+                        compress();
+                    } else {
+                        showResult(dataUrl, sizeKB);
+                    }
+                };
+                compress();
+            };
+            img.src = event.target.result;
+        };
+        reader.readAsDataURL(file);
+    }
+
+    function showResult(url, size) {
+        previewImg.src = url;
+        downloadUrl = url;
+        sizeText.innerText = `Final Size: ${size} KB`;
+        
+        if (size >= 10 && size <= 20) {
+             sizeText.innerHTML += " <span style='color:#10b981; font-size:0.8rem;'>(Perfect for Parivahan)</span>";
+        } else if (size < 10) {
+             sizeText.innerHTML += " <span style='color:#f59e0b; font-size:0.8rem;'>(Warning: Below 10KB)</span>";
+        } else {
+             sizeText.innerHTML += " <span style='color:#ef4444; font-size:0.8rem;'>(Too Large)</span>";
+        }
+
+        previewContainer.style.display = 'block';
+    }
+
+    function downloadImage() {
+        const a = document.createElement('a');
+        a.href = downloadUrl;
+        a.download = CONFIG.filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+    }
+</script>
+
+</body>
+</html>
