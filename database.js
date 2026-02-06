@@ -303,8 +303,46 @@ const toolsDB = [
     // =========================================
     // CATEGORY 5: CONVERTERS (JPG <-> PDF)
     // =========================================
-    // Add your tools here...
-
+    { 
+        "name": "JPG to PDF (Govt)", 
+        "url": "jpg-to-pdf-govt", 
+        "cat": "pdf", 
+        "icon": "fa-images", 
+        "desc": "Convert & compress JPGs to PDF for government forms.", 
+        "tag": "NEW" 
+    },
+    { 
+        "name": "JPG to PDF (Exams)", 
+        "url": "jpg-to-pdf-for-exam-applications", 
+        "cat": "pdf", 
+        "icon": "fa-file-pen", 
+        "desc": "Convert answer sheets/photos to PDF for exams.", 
+        "tag": "STUDENT" 
+    },
+    { 
+        "name": "JPG to PDF (Aadhaar)", 
+        "url": "jpg-to-pdf-for-aadhaar", 
+        "cat": "pdf", 
+        "icon": "fa-id-card", 
+        "desc": "Combine Front & Back photos to PDF for UIDAI.", 
+        "tag": "UIDAI" 
+    },
+    { 
+        "name": "PDF to JPG (SSC)", 
+        "url": "pdf-to-jpg-for-ssc-form", 
+        "cat": "pdf", 
+        "icon": "fa-file-image", 
+        "desc": "Convert PDF marksheets to JPG for SSC upload.", 
+        "tag": "SSC" 
+    },
+    { 
+        "name": "PDF to JPG (UPSC)", 
+        "url": "pdf-to-jpg-for-upsc-documents", 
+        "cat": "pdf", 
+        "icon": "fa-file-image", 
+        "desc": "Convert UPSC PDF documents to JPG images.", 
+        "tag": "UPSC" 
+    },
 ];
 
 // =====================================================================
