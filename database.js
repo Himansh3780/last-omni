@@ -243,8 +243,62 @@ const toolsDB = [
     // =========================================
     // CATEGORY 4: PASSWORD TOOLS (Scalable)
     // =========================================
-    // Add your tools here...
-
+   { 
+        "name": "Gmail Password Gen", 
+        "url": "strong-password-generator-for-gmail", 
+        "cat": "password", 
+        "icon": "fa-google", 
+        "desc": "Generate strong, secure passwords for Google accounts.", 
+        "tag": "SECURE" 
+    },
+    { 
+        "name": "Instagram Password Gen", 
+        "url": "strong-password-generator-for-instagram", 
+        "cat": "password", 
+        "icon": "fa-instagram", 
+        "desc": "Secure password generator for Instagram accounts.", 
+        "tag": "SECURE" 
+    },
+    { 
+        "name": "Facebook Password Gen", 
+        "url": "strong-password-generator-for-facebook", 
+        "cat": "password", 
+        "icon": "fa-facebook", 
+        "desc": "Create hack-proof passwords for your Facebook account.", 
+        "tag": "SECURE" 
+    },
+    { 
+        "name": "Banking Password Gen", 
+        "url": "strong-password-generator-for-online-banking", 
+        "cat": "password", 
+        "icon": "fa-building-columns", 
+        "desc": "Generate ultra-secure passwords for net banking.", 
+        "tag": "BANK" 
+    },
+    { 
+        "name": "UPI PIN & Pass Gen", 
+        "url": "secure-password-generator-for-upi-apps", 
+        "cat": "password", 
+        "icon": "fa-mobile-screen-button", 
+        "desc": "Generate secure App Passwords and 4/6 digit UPI PINs.", 
+        "tag": "UPI" 
+    },
+    { 
+        "name": "Student Password Gen", 
+        "url": "strong-password-generator-for-students", 
+        "cat": "password", 
+        "icon": "fa-graduation-cap", 
+        "desc": "Secure & Memorable password generator for students.", 
+        "tag": "EDU" 
+    },
+    { 
+        "name": "WiFi Password Gen", 
+        "url": "secure-wifi-password-generator", 
+        "cat": "password", 
+        "icon": "fa-wifi", 
+        "desc": "Generate WPA2/WPA3 keys (ASCII & Hex).", 
+        "tag": "WPA2" 
+    },
 
     // =========================================
     // CATEGORY 5: CONVERTERS (JPG <-> PDF)
