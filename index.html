@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <title>OmniTools | Free Government Form & Exam Tools (SSC, UPSC, Railways)</title>
+    <meta name="description" content="Free online tools for students and job seekers: Resize photos for SSC/UPSC, compress PDF for forms, and generate secure passwords. No signup required.">
+    <meta name="keywords" content="ssc photo resizer, upsc image resize, pdf compressor 200kb, signature resizer, free online tools">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://omnitools.in">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- 2. LUXURY GOLD THEME VARIABLES --- */
+        :root { 
+            /* DARK MODE (DEFAULT) */
+            --bg-body: #09090b;        
+            --bg-sidebar: #09090b;     
+            --bg-card: #0c0c0e;        
+            --bg-card-hover: #121215;  
+            --bg-header: rgba(9, 9, 11, 0.7);
+            
+            --border-subtle: #1f1f22;  
+            --border-hover: #3f3f46;
+            --input-bg: #09090b;
+            
+            /* THE "EXPENSIVE" GOLD COLOR */
+            --primary: #f59e0b;       /* Amber/Gold */
+            --accent-glow: rgba(245, 158, 11, 0.4); 
+            
+            --text-main: #ededef;
+            --text-muted: #a1a1aa;
+            
+            /* Gold Spotlight instead of Blue */
+            --spotlight: radial-gradient(circle at 50% -20%, rgba(245, 158, 11, 0.08), transparent 70%);
+            --grid-color: #1f1f22;
+
+            --sidebar-width: 270px;
+            --radius-md: 12px;
+            --transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* LIGHT MODE OVERRIDES */
+        [data-theme="light"] {
+            --bg-body: #ffffff;
+            --bg-sidebar: #f8fafc; 
+            --bg-card: #ffffff;
+            --bg-card-hover: #ffffeb;
+            --bg-header: rgba(255, 255, 255, 0.8);
+
+            --border-subtle: #e2e8f0; 
+            --border-hover: #cbd5e1;  
+            --input-bg: #f8fafc;
+
+            --text-main: #0f172a;      
+            --text-muted: #64748b;     
+            
+            --spotlight: radial-gradient(circle at 50% -20%, rgba(245, 158, 11, 0.05), transparent 60%);
+            --grid-color: #f1f5f9;
+        }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; outline: none; -webkit-tap-highlight-color: transparent; }
+        
+        body { 
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            height: 100vh;
+            display: flex;
+            overflow: hidden;
+            background-image: 
+                linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
+                linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
+            background-size: 50px 50px;
+            transition: var(--transition);
+        }
+
+        body::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 500px;
+            background: var(--spotlight);
+            pointer-events: none; z-index: 1;
+            transition: var(--transition);
+        }
+
+        /* --- SIDEBAR --- */
+        aside { 
+            width: var(--sidebar-width);
+            background: var(--bg-sidebar);
+            border-right: 1px solid var(--border-subtle);
+            display: flex; flex-direction: column; padding: 24px 16px; 
+            z-index: 100; transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease;
+            overflow-y: auto; height: 100%;
+        }
+        
+        .logo { 
+            font-size: 1.1rem; font-weight: 700; margin-bottom: 32px; 
+            display: flex; align-items: center; gap: 10px; color: var(--text-main); 
+            padding-left: 12px; letter-spacing: -0.01em;
+        }
+        .logo i { color: black; background: var(--primary); padding: 6px; border-radius: 6px; font-size: 0.9rem; }
+        
+        .nav-item { 
+            padding: 10px 12px; color: var(--text-muted); cursor: pointer; border-radius: 6px; 
+            margin-bottom: 2px; font-size: 0.85rem; font-weight: 500; display: flex; 
+            align-items: center; gap: 12px; transition: var(--transition);
+        }
+        .nav-item:hover { background: var(--bg-card-hover); color: var(--text-main); }
+        .nav-item.active { background: var(--bg-card-hover); color: var(--text-main); font-weight: 600; }
+        .nav-item i { width: 18px; text-align: center; opacity: 0.7; }
+        .nav-item.active i { opacity: 1; color: var(--primary); }
+
+        .sidebar-ad-box {
+            margin-top: 20px; padding: 0;
+            border-radius: var(--radius-md); overflow: hidden;
+            border: 1px solid var(--border-subtle); opacity: 0.8; transition: 0.2s;
+        }
+        .sidebar-ad-box:hover { opacity: 1; border-color: var(--border-hover); }
+
+        /* --- MAIN AREA --- */
+        main { flex: 1; display: flex; flex-direction: column; position: relative; width: 100%; z-index: 10; }
+
+        header { 
+            padding: 16px 32px; 
+            display: flex; align-items: center; gap: 20px; 
+            background: var(--bg-header);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border-subtle);
+            z-index: 50;
+            transition: var(--transition);
+        }
+
+        .menu-btn { display: none; font-size: 1.2rem; color: var(--text-main); cursor: pointer; }
+        
+        /* Command Palette Search */
+        .search-box { flex: 1; position: relative; max-width: 600px; }
+        .search-box i { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 0.9rem; }
+        .search-input { 
+            width: 100%; background: var(--input-bg); border: 1px solid var(--border-subtle); 
+            padding: 10px 16px 10px 38px; border-radius: 8px; 
+            color: var(--text-main); font-family: 'Inter', sans-serif; font-size: 0.9rem; 
+            transition: var(--transition);
+        }
+        .search-input:focus { border-color: var(--primary); box-shadow: 0 0 0 1px var(--primary); }
+        .search-input::placeholder { color: var(--text-muted); }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            cursor: pointer; padding: 8px; border-radius: 8px;
+            border: 1px solid var(--border-subtle); background: var(--input-bg);
+            color: var(--text-muted); transition: var(--transition);
+            display: flex; align-items: center; justify-content: center;
+        }
+        .theme-toggle:hover { color: var(--text-main); border-color: var(--text-muted); }
+
+        /* --- GRID & CARDS --- */
+        .grid-container { flex: 1; overflow-y: auto; padding: 32px; scroll-behavior: smooth; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; padding-bottom: 80px; }
+
+        .card { 
+            background: var(--bg-card); border: 1px solid var(--border-subtle); 
+            border-radius: var(--radius-md); padding: 20px; text-decoration: none; 
+            position: relative; display: flex; flex-direction: column; transition: var(--transition);
+        }
+        .card:hover { 
+            transform: translateY(-2px); border-color: var(--primary); 
+            background: var(--bg-card-hover); box-shadow: 0 10px 20px -5px rgba(0,0,0,0.1);
+        }
+
+        .icon-box { 
+            width: 40px; height: 40px; background: var(--bg-body); border-radius: 8px; 
+            display: flex; align-items: center; justify-content: center; 
+            font-size: 1.1rem; color: var(--text-main); margin-bottom: 16px; 
+            transition: var(--transition); border: 1px solid var(--border-subtle);
+        }
+        .card:hover .icon-box { color: var(--primary); border-color: var(--primary); }
+
+        .card-title { font-weight: 600; font-size: 0.95rem; margin-bottom: 6px; color: var(--text-main); display: flex; align-items: center; gap: 8px; }
+        .card-desc { color: var(--text-muted); font-size: 0.85rem; line-height: 1.5; font-weight: 400; }
+        .verified-icon { color: var(--primary); font-size: 0.8rem; }
+
+        /* FAVORITE STAR */
+        .fav-btn {
+            position: absolute; top: 15px; right: 15px; z-index: 10;
+            color: var(--text-muted); font-size: 1rem; cursor: pointer;
+            width: 30px; height: 30px; display: flex; align-items: center; justify-content: center;
+            border-radius: 50%; transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background: rgba(0,0,0,0.2); border: 1px solid transparent;
+        }
+        .fav-btn:hover { background: var(--bg-card-hover); color: var(--text-main); transform: scale(1.1); }
+        .fav-btn.active { color: var(--primary); background: rgba(245, 158, 11, 0.1); border-color: rgba(245, 158, 11, 0.3); }
+
+        .badge { 
+            position: absolute; top: 20px; right: 50px; 
+            font-size: 0.65rem; font-weight: 600; padding: 2px 8px; border-radius: 4px; 
+            text-transform: uppercase; letter-spacing: 0.02em; border: 1px solid transparent;
+        }
+        .badge.hot { background: rgba(245, 158, 11, 0.1); color: var(--primary); border-color: rgba(245, 158, 11, 0.2); }
+
+        /* HERO CAROUSEL */
+        .hero-container {
+            width: 100%; height: 260px; border-radius: 16px; position: relative; overflow: hidden;
+            margin-bottom: 40px; border: 1px solid var(--border-subtle); 
+        }
+        .slide-content { background: linear-gradient(90deg, var(--bg-body) 40%, transparent 100%); padding: 40px; }
+        .hero-btn {
+            background: var(--primary); color: black; border: none; padding: 10px 20px;
+            border-radius: 6px; font-weight: 700; font-size: 0.85rem;
+            margin-top: 20px; transition: var(--transition); cursor: pointer;
+        }
+        .hero-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+
+        /* STICKY FOOTER */
+        #sticky-footer {
+            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: auto; min-width: 350px;
+            background: var(--bg-sidebar); border: 1px solid var(--border-subtle); border-radius: 12px;
+            padding: 10px 20px; z-index: 200; display: none; align-items: center; justify-content: space-between; gap: 20px;
+            box-shadow: 0 10px 30px -5px rgba(0,0,0,0.5);
+        }
+        .footer-btn { background: var(--primary); color: black; padding: 6px 16px; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 0.85rem; }
+        .close-footer { cursor: pointer; color: var(--text-muted); transition: 0.2s; }
+        .close-footer:hover { color: var(--text-main); }
+        
+        /* SEO Footer Text Area */
+        .seo-block { margin-top: 60px; border-top: 1px solid var(--border-subtle); padding-top: 40px; color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; }
+        .seo-block h3 { color: var(--text-main); font-size: 1rem; margin-bottom: 10px; }
+        .seo-block p { margin-bottom: 15px; }
+
+        /* SCROLLBAR */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: var(--border-subtle); border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--border-hover); }
+
+        @media(max-width: 850px) {
+            aside { position: fixed; left: 0; top: 0; bottom: 0; transform: translateX(-100%); width: 85%; }
+            aside.open { transform: translateX(0); box-shadow: 50px 0 50px rgba(0,0,0,0.5); }
+            #overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 90; display: none; backdrop-filter: blur(2px); }
+            #overlay.active { display: block; }
+            .menu-btn { display: block; }
+            .grid-container { padding: 20px; }
+            header { padding: 16px 20px; }
+        }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "OmniTools",
+      "url": "https://omnitools.in",
+      "description": "Free online developer dashboard with PDF tools, JSON formatter, and AI utilities.",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "All",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "author": { "@type": "Organization", "name": "OmniTools" }
+    }
+    </script>
+</head>
+<body>
+
+    <div id="overlay" onclick="toggleMenu()"></div>
+
+    <aside id="sidebar">
+        <div class="logo">
+            <i class="fa-solid fa-layer-group"></i> OmniTools
+        </div>
+        
+        <div class="nav-item active" onclick="filter('all', this)"><i class="fa-solid fa-border-all"></i> All Tools</div>
+        <div class="nav-item" onclick="filter('fav', this)"><i class="fa-solid fa-star"></i> Favorites</div>
+        
+        <div class="nav-item" onclick="filter('image-resize', this)"><i class="fa-solid fa-image"></i> Image Resize</div>
+        <div class="nav-item" onclick="filter('signature', this)"><i class="fa-solid fa-file-signature"></i> Signature Resize</div>
+        <div class="nav-item" onclick="filter('pdf', this)"><i class="fa-solid fa-file-pdf"></i> PDF Compress</div>
+        <div class="nav-item" onclick="filter('password', this)"><i class="fa-solid fa-key"></i> Password Tools</div>
+        <div class="nav-item" onclick="filter('converter', this)"><i class="fa-solid fa-file-arrow-up"></i> JPG ↔ PDF</div>
+        
+        <div class="sidebar-ad-box" id="sidebar-ad-container"></div>
+
+        <div class="nav-item" onclick="toggleMenu()" style="margin-top:auto; color:#ef4444; border-top:1px solid var(--border-subtle); border-radius:0; flex-shrink: 0;">
+            <i class="fa-solid fa-arrow-left"></i> Close Menu
+        </div>
+    </aside>
+
+    <main>
+        <header>
+            <div class="menu-btn" onclick="toggleMenu()"><i class="fa-solid fa-bars"></i></div>
+            
+            <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" class="search-input" id="search" placeholder="Type / to search..." onkeyup="searchTools()">
+            </div>
+
+            <div class="theme-toggle" onclick="toggleTheme()" title="Switch Theme">
+                <i id="theme-icon" class="fa-solid fa-sun"></i>
+            </div>
+        </header>
+
+        <div class="grid-container">
+
+            <div class="hero-container" id="hero-wrapper" style="display:none;"></div>
+
+            <div id="intro-text-box" style="margin: 0 0 40px 0;">
+                <h2 style="font-size: 1.5rem; margin-bottom: 8px; color: var(--text-main); letter-spacing: -0.01em;">Dashboard</h2>
+                <p style="max-width: 600px; line-height: 1.5; color: var(--text-muted); font-size: 0.95rem;">
+                    Access your complete toolkit. Open source, fast, and free.
+                </p>
+            </div>
+
+            <div id="recents-container"></div>
+
+            <h3 style="margin-bottom:20px; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted);">Applications</h3>
+            
+            <div class="grid" id="tools-grid">
+                <div style="grid-column:1/-1; color:var(--text-muted);">Loading Tools...</div>
+            </div>
+
+            <div class="seo-block">
+                <h3>Why use OmniTools?</h3>
+                <p>
+                    OmniTools is the premier destination for free online utilities. Whether you need a 
+                    <strong>PDF Compressor</strong> to shrink documents for email, a <strong>JSON Formatter</strong> for debugging code, 
+                    or a <strong>TikTok Downloader</strong> for saving media, we have you covered.
+                </p>
+                <p>
+                    All processing happens in your browser (Client-Side), ensuring maximum privacy and speed. 
+                    No file uploads to servers. No signup required.
+                </p>
+            </div>
+
+            <footer style="margin-top: 40px; border-top: 1px solid var(--border-subtle); padding: 40px 0; text-align: center;">
+                <div style="display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 20px;">
+                    <i class="fa-solid fa-layer-group" style="color:var(--text-muted)"></i> 
+                    <span style="font-weight: 600; color: var(--text-main); font-size: 0.95rem;">OmniTools</span>
+                </div>
+                
+                <div style="display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-bottom: 30px;">
+                    <a href="privacy.html" style="color: var(--text-muted); text-decoration: none; font-size:0.85rem; transition: 0.2s;">Privacy</a>
+                    <a href="terms.html" style="color: var(--text-muted); text-decoration: none; font-size:0.85rem; transition: 0.2s;">Terms</a>
+                    <a href="contact.html" style="color: var(--text-muted); text-decoration: none; font-size:0.85rem; transition: 0.2s;">Contact</a>
+                </div>
+
+                <div style="color: var(--text-muted); font-size: 0.8rem;">
+                    &copy; 2026 OmniTools Inc.
+                </div>
+            </footer>
+        </div>
+    </main>
+    
+    <div id="sticky-footer"></div>
+
+    <script src="ads.js"></script>
+    <script src="database.js"></script>
+
+    <script>
+        const grid = document.getElementById('tools-grid');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+        const heroWrapper = document.getElementById('hero-wrapper');
+        const introText = document.getElementById('intro-text-box');
+
+        // --- 1. FAVORITES LOGIC ---
+        function getFavorites() {
+            return JSON.parse(localStorage.getItem('omni_favorites')) || [];
+        }
+
+        function toggleFav(e, url) {
+            e.preventDefault(); 
+            e.stopPropagation(); 
+            
+            let favs = getFavorites();
+            const btn = e.currentTarget;
+            
+            if (favs.includes(url)) {
+                favs = favs.filter(u => u !== url);
+                btn.classList.remove('active');
+                btn.innerHTML = '<i class="fa-regular fa-star"></i>';
+            } else {
+                favs.push(url);
+                btn.classList.add('active');
+                btn.innerHTML = '<i class="fa-solid fa-star"></i>';
+            }
+            
+            localStorage.setItem('omni_favorites', JSON.stringify(favs));
+            
+            // Refresh if on Favorites tab
+            const activeTab = document.querySelector('.nav-item.active');
+            if(activeTab && activeTab.innerText.includes('Favorites')) {
+                render('fav');
+            }
+        }
+
+        // --- 2. RECENTS LOGIC ---
+        function addToRecents(url) {
+            let recents = JSON.parse(localStorage.getItem('omni_recents')) || [];
+            recents = recents.filter(u => u !== url); // Remove duplicate
+            recents.unshift(url); // Add to front
+            if(recents.length > 4) recents.pop(); // Limit to 4
+            localStorage.setItem('omni_recents', JSON.stringify(recents));
+        }
+
+        function renderRecents() {
+            const container = document.getElementById('recents-container');
+            const recents = JSON.parse(localStorage.getItem('omni_recents')) || [];
+            
+            // Need the DB to look up names/icons
+            const db = (typeof toolsDB !== 'undefined') ? toolsDB : [];
+            if(recents.length === 0 || db.length === 0) {
+                container.style.display = 'none';
+                return;
+            }
+
+            const recentTools = recents.map(url => db.find(t => t.url === url)).filter(Boolean);
+            
+            if(recentTools.length === 0) return;
+
+            let html = `<h3 style="margin-bottom:15px; font-size:0.8rem; font-weight:600; text-transform:uppercase; letter-spacing:0.05em; color:var(--primary);">Recently Used</h3>
+                        <div class="grid" style="margin-bottom:40px;">`;
+            
+            recentTools.forEach(tool => {
+                let iconPrefix = "fa-solid";
+                if (['tiktok','instagram','youtube','twitter','facebook','discord','paypal'].some(b => tool.icon.includes(b))) iconPrefix = "fa-brands";
+                let brandClass = "brand-dev"; 
+                if (tool.cat === 'social') brandClass = "brand-social";
+                else if (tool.cat === 'ai') brandClass = "brand-ai";
+
+                html += `
+                    <a href="${tool.url}.html" class="card" onclick="addToRecents('${tool.url}')"> 
+                        <div class="icon-box ${brandClass}"><i class="${iconPrefix} ${tool.icon}"></i></div>
+                        <div class="card-title">${tool.name}</div>
+                        <div class="card-desc">${tool.desc}</div>
+                    </a>
+                `;
+            });
+
+            html += `</div>`;
+            container.innerHTML = html;
+            container.style.display = 'block';
+        }
+
+        // --- 3. THEME SWITCHER ---
+        function toggleTheme() {
+            const html = document.documentElement;
+            const icon = document.getElementById('theme-icon');
+            const current = html.getAttribute('data-theme');
+            
+            if (current === 'dark') {
+                html.setAttribute('data-theme', 'light');
+                icon.className = 'fa-solid fa-moon';
+                localStorage.setItem('theme', 'light');
+            } else {
+                html.setAttribute('data-theme', 'dark');
+                icon.className = 'fa-solid fa-sun';
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        (function() {
+            const saved = localStorage.getItem('theme');
+            const icon = document.getElementById('theme-icon');
+            if (saved === 'light') {
+                document.documentElement.setAttribute('data-theme', 'light');
+                if(icon) icon.className = 'fa-solid fa-moon';
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                if(icon) icon.className = 'fa-solid fa-sun';
+            }
+        })();
+
+        // --- 4. ADS ---
+        function loadAds() {
+            if (typeof adConfig === 'undefined' || !adConfig.enabled) {
+                heroWrapper.style.display = 'none';
+                return; 
+            }
+            if(adConfig.sidebar) {
+                const sbContainer = document.getElementById('sidebar-ad-container');
+                sbContainer.innerHTML = `<div style="font-size:0.65rem; color:var(--text-muted); margin-bottom:10px; text-transform:uppercase; font-weight:700; padding-left:5px;">Sponsored</div><a href="${adConfig.sidebar.link}"><img src="${adConfig.sidebar.image}" style="width:100%; border-radius:6px; display:block; border:1px solid var(--border-subtle);"></a>`;
+            }
+            if(adConfig.hero && adConfig.hero.length > 0) {
+                let slidesHTML = "";
+                let dotsHTML = '<div class="dots" style="position:absolute; bottom:20px; left:40px; display:flex; gap:6px;">';
+                adConfig.hero.forEach((ad, index) => {
+                    const activeClass = index === 0 ? 'opacity:1; z-index:2;' : 'opacity:0;';
+                    slidesHTML += `<div class="slide" style="position:absolute; inset:0; transition:opacity 0.5s ease; background-size:cover; background-position:center; display:flex; align-items:center; background-image: url('${ad.bgImage}'); ${activeClass}"><div class="slide-content"><span style="color:${ad.accent}; font-weight:700; letter-spacing:0.05em; font-size:0.7rem; margin-bottom:8px; text-transform:uppercase; display:block;">${ad.tag}</span><h1 style="font-size:2rem; font-weight:800; line-height:1.1; margin-bottom:12px; color:var(--text-main);">${ad.title}</h1><p style="color:var(--text-main); opacity:0.8; max-width:500px; margin-bottom:20px; font-size:0.95rem;">${ad.desc}</p><a href="${ad.btnLink}" class="hero-btn">${ad.btnText}</a></div></div>`;
+                    const dotStyle = index === 0 ? 'background:var(--text-main);' : 'background:var(--text-muted); opacity:0.5;';
+                    dotsHTML += `<div class="dot" style="height:6px; width:6px; border-radius:50%; cursor:pointer; transition:0.3s; ${dotStyle}" onclick="setSlide(${index})"></div>`;
+                });
+                heroWrapper.innerHTML = slidesHTML + dotsHTML + '</div>';
+                window.heroSlides = heroWrapper.querySelectorAll('.slide');
+                window.heroDots = heroWrapper.querySelectorAll('.dot');
+                window.currentSlide = 0;
+                heroWrapper.style.display = 'block';
+            }
+            if(adConfig.stickyFooter && adConfig.stickyFooter.enabled) {
+                const footer = document.getElementById('sticky-footer');
+                const data = adConfig.stickyFooter;
+                footer.style.display = 'flex';
+                footer.innerHTML = `<div class="footer-text" style="color:var(--text-main); font-size:0.85rem; font-weight:500;">${data.text}</div><div style="display:flex; align-items:center; gap:12px;"><a href="${data.link}" class="footer-btn">${data.btnText}</a><div class="close-footer" onclick="this.parentElement.parentElement.style.display='none'"><i class="fa-solid fa-xmark"></i></div></div>`;
+            }
+        }
+
+        // --- 5. RENDER FUNCTION ---
+        function render(cat) {
+            if(window.innerWidth < 850) {
+                sidebar.classList.remove('open');
+                overlay.classList.remove('active');
+            }
+            if (cat === 'all' || cat === 'fav') {
+                if (introText) introText.style.display = 'block';
+                if (heroWrapper && heroWrapper.innerHTML.trim() !== "") heroWrapper.style.display = 'block';
+                
+                // Show Recents ONLY on 'All Tools'
+                const recentsDiv = document.getElementById('recents-container');
+                if(cat === 'all' && recentsDiv.innerHTML !== "") recentsDiv.style.display = 'block';
+                else recentsDiv.style.display = 'none';
+
+            } else {
+                if (introText) introText.style.display = 'none';
+                if (heroWrapper) heroWrapper.style.display = 'none';
+                document.getElementById('recents-container').style.display = 'none';
+            }
+
+            const db = (typeof toolsDB !== 'undefined') ? toolsDB : [];
+            
+            // Empty State
+            if(!db || db.length === 0) { 
+                grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:40px; color:var(--text-muted);">No tools loaded from database.js</div>`;
+                return; 
+            }
+
+            // Filtering
+            let filtered = [];
+            const favs = getFavorites();
+
+            if (cat === 'fav') {
+                grid.innerHTML = ""; 
+                filtered = db.filter(t => favs.includes(t.url));
+                if (filtered.length === 0) {
+                    grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:40px; color:var(--text-muted);">
+                        <i class="fa-regular fa-star" style="font-size:3rem; margin-bottom:15px; opacity:0.3;"></i><br>
+                        No favorites yet. Click the star on any tool to pin it here.
+                    </div>`;
+                    return;
+                }
+            } else if (cat === 'all') {
+                filtered = db;
+            } else {
+                filtered = db.filter(t => t.cat === cat);
+                if (filtered.length === 0) {
+                    grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:40px; color:var(--text-muted);">
+                        No tools found in this category yet.
+                    </div>`;
+                    return;
+                }
+            }
+
+            grid.innerHTML = ""; // Clear Grid
+
+            let availableAds = [];
+            if(typeof adConfig !== 'undefined' && adConfig.enabled && adConfig.native) {
+                availableAds = adConfig.native.filter(ad => ad.category === 'all' || ad.category === cat);
+            }
+
+            let counter = 0;
+            let adCounter = 0;
+            
+            filtered.forEach(tool => {
+                let badge = tool.tag ? `<span class="badge ${tool.tag.toLowerCase()}">${tool.tag}</span>` : "";
+                let iconPrefix = "fa-solid";
+                
+                let brandClass = "brand-dev"; 
+                if (tool.cat === 'social') brandClass = "brand-social";
+                else if (tool.cat === 'ai') brandClass = "brand-ai";
+
+                // Favorites State
+                const isFav = favs.includes(tool.url);
+                const starClass = isFav ? "active" : "";
+                const starIcon = isFav ? "fa-solid fa-star" : "fa-regular fa-star";
+
+                // ADD onclick="addToRecents" HERE
+                grid.innerHTML += `
+                    <a href="${tool.url}.html" class="card" onclick="addToRecents('${tool.url}')"> 
+                        ${badge}
+                        <div class="fav-btn ${starClass}" onclick="toggleFav(event, '${tool.url}')">
+                            <i class="${starIcon}"></i>
+                        </div>
+
+                        <div class="icon-box ${brandClass}"><i class="${iconPrefix} ${tool.icon}"></i></div>
+                        <div class="card-title">${tool.name} <i class="fa-solid fa-circle-check verified-icon"></i></div>
+                        <div class="card-desc">${tool.desc}</div>
+                    </a>
+                `;
+
+                counter++;
+                if (counter % 4 === 0 && availableAds.length > 0) {
+                    const ad = availableAds[adCounter % availableAds.length];
+                    grid.innerHTML += `
+                        <a href="${ad.link}" class="card native-ad">
+                            <div class="icon-box" style="background:var(--bg-body); color:var(--text-main); border:none;"><i class="fa-solid ${ad.icon}"></i></div>
+                            <div class="card-title">${ad.title}</div>
+                            <div class="card-desc" style="color:var(--text-muted);">${ad.desc}</div>
+                            <div class="ad-cta">${ad.cta} <i class="fa-solid fa-arrow-right"></i></div>
+                        </a>
+                    `;
+                    adCounter++; 
+                }
+            });
+        }
+
+        // --- FILTER WITH MEMORY ---
+        function filter(cat, btn) {
+            document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
+            if(btn) {
+                btn.classList.add('active');
+            } else {
+                const target = document.querySelector(`.nav-item[onclick*="'${cat}'"]`);
+                if(target) target.classList.add('active');
+            }
+            
+            localStorage.setItem('omni_last_category', cat);
+            render(cat);
+        }
+        
+        function searchTools() {
+            const q = document.getElementById('search').value.toLowerCase();
+            document.querySelectorAll('.card').forEach(c => {
+                if(c.classList.contains('native-ad')) return; 
+                const title = c.querySelector('.card-title').innerText.toLowerCase();
+                const desc = c.querySelector('.card-desc').innerText.toLowerCase();
+                c.style.display = (title.includes(q) || desc.includes(q)) ? 'flex' : 'none';
+            });
+        }
+
+        function toggleMenu() { sidebar.classList.toggle('open'); overlay.classList.toggle('active'); }
+
+        function setSlide(n) {
+            if(!window.heroSlides) return;
+            window.heroSlides.forEach(s => { s.style.opacity = '0'; s.style.zIndex = '0'; });
+            window.heroDots.forEach(d => { d.style.background = 'var(--text-muted)'; d.style.opacity = '0.5'; });
+            window.currentSlide = n;
+            window.heroSlides[window.currentSlide].style.opacity = '1';
+            window.heroSlides[window.currentSlide].style.zIndex = '2';
+            window.heroDots[window.currentSlide].style.background = 'var(--text-main)';
+            window.heroDots[window.currentSlide].style.opacity = '1';
+        }
+        function nextSlide() {
+            if(!window.heroSlides) return;
+            let next = (window.currentSlide + 1) % window.heroSlides.length;
+            setSlide(next);
+        }
+
+        // KEYBOARD SHORTCUTS
+        document.addEventListener('keydown', function(e) {
+            if (e.key === '/' && document.activeElement !== document.getElementById('search')) {
+                e.preventDefault();
+                document.getElementById('search').focus();
+            }
+        });
+
+        // --- INIT ---
+        loadAds(); 
+        
+        // Load Database then Init Logic
+        setTimeout(() => {
+            renderRecents(); // Load recents bar first
+            const savedCat = localStorage.getItem('omni_last_category') || 'all';
+            filter(savedCat, null); 
+        }, 50);
+        
+        setInterval(nextSlide, 5000); 
+    </script>
+</body>
+</html>

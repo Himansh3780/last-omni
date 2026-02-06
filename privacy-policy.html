@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enterprise Privacy Policy Generator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- THEME --- */
+        :root { --bg: #020617; --panel: #0f172a; --text: #f8fafc; --muted: #94a3b8; --border: #1e293b; --primary: #6366f1; --success: #22c55e; }
+        * { box-sizing: border-box; margin: 0; padding: 0; outline: none; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; }
+        
+        /* NAV */
+        nav { padding: 20px 5%; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+        .back-btn { color: var(--muted); text-decoration: none; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+        .back-btn:hover { color: white; }
+        .badge { background: rgba(99, 102, 241, 0.1); color: #818cf8; padding: 5px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 800; }
+
+        .container { max-width: 800px; margin: 40px auto; padding: 20px; flex: 1; width: 100%; }
+
+        /* WIZARD CARD */
+        .wizard-card { background: var(--panel); border: 1px solid var(--border); border-radius: 24px; padding: 40px; box-shadow: 0 20px 50px rgba(0,0,0,0.3); }
+
+        /* PROGRESS BAR */
+        .progress-container { display: flex; justify-content: space-between; margin-bottom: 40px; position: relative; }
+        .progress-line { position: absolute; top: 50%; left: 0; width: 100%; height: 2px; background: #1e293b; z-index: 0; transform: translateY(-50%); }
+        .progress-fill { position: absolute; top: 50%; left: 0; width: 0%; height: 2px; background: var(--primary); z-index: 1; transform: translateY(-50%); transition: 0.4s ease; }
+        
+        .step-dot { 
+            width: 35px; height: 35px; background: #1e293b; border-radius: 50%; display: flex; align-items: center; justify-content: center; 
+            font-weight: 700; font-size: 0.9rem; position: relative; z-index: 2; transition: 0.3s; border: 2px solid var(--panel);
+        }
+        .step-dot.active { background: var(--primary); color: white; box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.2); }
+        .step-dot.completed { background: var(--success); color: white; }
+
+        /* STEPS VISIBILITY */
+        .step-content { display: none; animation: fadeIn 0.4s ease; }
+        .step-content.active { display: block; }
+        
+        h2 { font-size: 1.8rem; margin-bottom: 10px; }
+        p.sub { color: var(--muted); margin-bottom: 30px; font-size: 0.95rem; }
+
+        /* INPUTS */
+        .input-group { margin-bottom: 20px; }
+        label { display: block; color: var(--muted); margin-bottom: 8px; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; }
+        input[type="text"], input[type="email"] { 
+            width: 100%; padding: 16px; background: #020617; border: 1px solid #334155; color: white; border-radius: 12px; font-size: 1rem;
+        }
+
+        /* TOGGLES */
+        .toggle-row { display: flex; justify-content: space-between; align-items: center; padding: 20px; background: rgba(255,255,255,0.03); border-radius: 12px; margin-bottom: 15px; border: 1px solid transparent; cursor: pointer; }
+        .toggle-row:hover { border-color: #334155; }
+        .switch { position: relative; display: inline-block; width: 50px; height: 26px; }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #334155; transition: .4s; border-radius: 34px; }
+        .slider:before { position: absolute; content: ""; height: 20px; width: 20px; left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%; }
+        input:checked + .slider { background-color: var(--primary); }
+        input:checked + .slider:before { transform: translateX(24px); }
+
+        /* BUTTONS */
+        .btn-row { display: flex; justify-content: space-between; margin-top: 40px; }
+        button { padding: 15px 30px; border-radius: 10px; font-weight: 700; cursor: pointer; border: none; font-size: 1rem; transition: 0.2s; }
+        .btn-back { background: transparent; color: var(--muted); }
+        .btn-next { background: var(--primary); color: white; }
+        .btn-next:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3); }
+
+        /* PREVIEW AREA */
+        .doc-preview { background: white; color: #333; padding: 40px; border-radius: 12px; max-height: 500px; overflow-y: auto; font-family: serif; line-height: 1.6; margin-bottom: 20px; border: 1px solid #ccc; }
+        .doc-preview h1 { font-size: 24px; color: black; }
+        .doc-preview h2 { font-size: 18px; color: black; margin-top: 20px; }
+        .doc-preview p, .doc-preview ul { font-size: 16px; margin-bottom: 15px; color: #333; }
+
+        .final-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .btn-action { width: 100%; padding: 15px; border-radius: 10px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; border:none; color:white; }
+        .btn-copy { background: #334155; }
+        .btn-dl { background: #10b981; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="index.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Back to Tools</a>
+    <span class="badge">LEGAL WIZARD</span>
+</nav>
+
+<div class="container">
+    <div class="wizard-card">
+        
+        <div class="progress-container" id="progressBar">
+            <div class="progress-line"></div>
+            <div class="progress-fill" id="progFill"></div>
+            <div class="step-dot active">1</div>
+            <div class="step-dot">2</div>
+            <div class="step-dot">3</div>
+        </div>
+
+        <div class="step-content active" id="step1">
+            <h2>General Information</h2>
+            <p class="sub">Tell us about your business.</p>
+            
+            <div class="input-group">
+                <label>Company / Website Name</label>
+                <input type="text" id="companyName" placeholder="e.g. My Website">
+            </div>
+            <div class="input-group">
+                <label>Website URL</label>
+                <input type="text" id="websiteUrl" placeholder="e.g. https://website.com">
+            </div>
+            <div class="input-group">
+                <label>Country</label>
+                <input type="text" id="country" placeholder="e.g. USA">
+            </div>
+
+            <div class="btn-row" style="justify-content: flex-end;">
+                <button class="btn-next" onclick="nextStep(2)">Next Step <i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+        </div>
+
+        <div class="step-content" id="step2">
+            <h2>Data Collection</h2>
+            <p class="sub">Enable the services you use.</p>
+            
+            <div class="toggle-row" onclick="document.getElementById('checkPersonal').click()">
+                <div><h4>Collect Emails/Names?</h4><p style="color:#94a3b8; font-size:0.8rem;">Forms, Newsletters, Signups</p></div>
+                <label class="switch"><input type="checkbox" id="checkPersonal"><span class="slider"></span></label>
+            </div>
+
+            <div class="toggle-row" onclick="document.getElementById('checkCookies').click()">
+                <div><h4>Use Cookies?</h4><p style="color:#94a3b8; font-size:0.8rem;">Standard website cookies</p></div>
+                <label class="switch"><input type="checkbox" id="checkCookies" checked><span class="slider"></span></label>
+            </div>
+
+            <div class="toggle-row" onclick="document.getElementById('checkAds').click()">
+                <div><h4>Show Ads (AdSense)?</h4><p style="color:#94a3b8; font-size:0.8rem;">Includes DART cookie clause</p></div>
+                <label class="switch"><input type="checkbox" id="checkAds"><span class="slider"></span></label>
+            </div>
+
+            <div class="toggle-row" onclick="document.getElementById('checkAnalytics').click()">
+                <div><h4>Google Analytics?</h4><p style="color:#94a3b8; font-size:0.8rem;">Traffic tracking clause</p></div>
+                <label class="switch"><input type="checkbox" id="checkAnalytics"><span class="slider"></span></label>
+            </div>
+
+            <div class="btn-row">
+                <button class="btn-back" onclick="prevStep(1)">Back</button>
+                <button class="btn-next" onclick="nextStep(3)">Next Step <i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+        </div>
+
+        <div class="step-content" id="step3">
+            <h2>Final Details</h2>
+            <p class="sub">Contact info and legal compliance.</p>
+            
+            <div class="input-group">
+                <label>Contact Email</label>
+                <input type="email" id="contactEmail" placeholder="support@website.com">
+            </div>
+
+            <div class="toggle-row" onclick="document.getElementById('checkGDPR').click()" style="border:1px solid #6366f1;">
+                <div><h4 style="color:#818cf8;">GDPR & CCPA Ready?</h4><p style="color:#94a3b8; font-size:0.8rem;">Strict clauses for EU/US</p></div>
+                <label class="switch"><input type="checkbox" id="checkGDPR" checked><span class="slider"></span></label>
+            </div>
+
+            <div class="btn-row">
+                <button class="btn-back" onclick="prevStep(2)">Back</button>
+                <button class="btn-next" onclick="generatePolicy()">Generate Policy <i class="fa-solid fa-wand-magic-sparkles"></i></button>
+            </div>
+        </div>
+
+        <div class="step-content" id="result-screen">
+            <h2 style="text-align:center; color:#22c55e;"><i class="fa-solid fa-check-circle"></i> Success!</h2>
+            <p class="sub" style="text-align:center;">Your policy is ready.</p>
+            
+            <div class="doc-preview" id="previewBox"></div>
+
+            <div class="final-actions">
+                <button class="btn-action btn-copy" onclick="copyHTML()"><i class="fa-solid fa-copy"></i> Copy HTML</button>
+                <button class="btn-action btn-dl" onclick="downloadHTML()"><i class="fa-solid fa-download"></i> Download</button>
+            </div>
+            
+            <div style="text-align:center; margin-top:20px;">
+                <button class="btn-back" onclick="location.reload()">Start Over</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    // NAVIGATION LOGIC
+    function nextStep(step) {
+        if(step === 2) {
+            const name = document.getElementById('companyName').value;
+            const url = document.getElementById('websiteUrl').value;
+            if(!name || !url) { alert("Please enter Company Name and URL."); return; }
+        }
+        showStep(step);
+    }
+
+    function prevStep(step) { showStep(step); }
+
+    function showStep(step) {
+        document.querySelectorAll('.step-content').forEach(el => el.classList.remove('active'));
+        document.getElementById('step' + step).classList.add('active');
+        
+        // Update Dots
+        const dots = document.querySelectorAll('.step-dot');
+        dots.forEach((dot, index) => {
+            dot.classList.remove('active', 'completed');
+            if (index + 1 < step) dot.classList.add('completed');
+            if (index + 1 === step) dot.classList.add('active');
+        });
+
+        // Update Bar
+        const percent = ((step - 1) / 2) * 100;
+        document.getElementById('progFill').style.width = percent + "%";
+    }
+
+    // GENERATOR LOGIC
+    function generatePolicy() {
+        const company = document.getElementById('companyName').value;
+        const url = document.getElementById('websiteUrl').value;
+        const email = document.getElementById('contactEmail').value || "email@example.com";
+        const date = new Date().toLocaleDateString();
+
+        const hasAds = document.getElementById('checkAds').checked;
+        const hasAnalytics = document.getElementById('checkAnalytics').checked;
+        const hasGDPR = document.getElementById('checkGDPR').checked;
+
+        let html = `<h1>Privacy Policy for ${company}</h1>
+<p>Last updated: ${date}</p>
+<p>At ${company}, accessible from ${url}, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by ${company} and how we use it.</p>`;
+
+        if(hasGDPR) {
+            html += `<h2>GDPR Data Protection Rights</h2>
+<p>We would like to make sure you are fully aware of all of your data protection rights. Every user is entitled to the following:</p>
+<ul>
+<li>The right to access – You have the right to request copies of your personal data.</li>
+<li>The right to rectification – You have the right to request that we correct any information you believe is inaccurate.</li>
+<li>The right to erasure – You have the right to request that we erase your personal data, under certain conditions.</li>
+</ul>`;
+        }
+
+        html += `<h2>Log Files</h2>
+<p>${company} follows a standard procedure of using log files. These files log visitors when they visit websites.</p>`;
+
+        if(hasAds) {
+            html += `<h2>Google DoubleClick DART Cookie</h2>
+<p>Google is one of a third-party vendor on our site. It also uses cookies, known as DART cookies, to serve ads to our site visitors based upon their visit to ${url} and other sites on the internet.</p>`;
+        }
+
+        if(hasAnalytics) {
+            html += `<h2>Google Analytics</h2>
+<p>We use Google Analytics to analyze the use of our website. Google Analytics gathers information about website use by means of cookies.</p>`;
+        }
+
+        html += `<h2>Contact Us</h2>
+<p>If you have any questions about this Privacy Policy, please contact us via email: ${email}</p>`;
+
+        // Show Result
+        document.getElementById('step3').classList.remove('active');
+        document.getElementById('progressBar').style.display = 'none';
+        document.getElementById('result-screen').classList.add('active');
+        document.getElementById('previewBox').innerHTML = html;
+    }
+
+    // SAFE COPY FUNCTION (Works offline/file protocol)
+    function copyHTML() {
+        const text = document.getElementById('previewBox').innerHTML;
+        const textArea = document.createElement("textarea");
+        textArea.value = text;
+        document.body.appendChild(textArea);
+        textArea.select();
+        try {
+            document.execCommand('copy');
+            alert("HTML Code Copied to Clipboard!");
+        } catch (err) {
+            alert("Could not copy automatically. Please manually select and copy.");
+        }
+        document.body.removeChild(textArea);
+    }
+
+    function downloadHTML() {
+        const text = document.getElementById('previewBox').innerHTML;
+        const element = document.createElement('a');
+        element.setAttribute('href', 'data:text/html;charset=utf-8,' + encodeURIComponent('<html><body>' + text + '</body></html>'));
+        element.setAttribute('download', 'privacy-policy.html');
+        document.body.appendChild(element);
+        element.click();
+        document.body.removeChild(element);
+    }
+</script>
+<script src="database.js"></script>
+
+</body>
+
+</html>
