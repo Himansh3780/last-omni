@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>OmniTools - Free Image Resizer, PDF Compressor & Password Generator</title>
+    <meta name="description"
+        content="5 free online tools: resize images, compress PDFs, generate passwords, resize signatures, and convert JPG to PDF. 100% client-side — no uploads, no data collection.">
+    <meta name="keywords"
+        content="image resizer online, pdf compressor free, password generator, signature resizer, jpg to pdf converter, omnitools">
+    <link rel="canonical" href="https://omnitools.in">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- 1. ENTERPRISE DESIGN TOKENS --- */
+        :root {
+            /* LIGHT MODE */
+            --bg-body: #ffffff;
+            --bg-sidebar: rgba(255, 255, 255, 0.7);
+            --bg-card: #ffffff;
+            --bg-card-hover: #f8fafc;
+            --bg-header: rgba(255, 255, 255, 0.7);
+
+            --border-subtle: #e2e8f0;
+            --border-hover: #cbd5e1;
+            --input-bg: #f1f5f9;
+
+            --primary: #d97706;
+            /* Gold */
+            --primary-dim: rgba(217, 119, 6, 0.1);
+
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+
+            --sidebar-width: 260px;
+            --radius-lg: 16px;
+            --transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+
+            /* GRID BACKGROUND (Light) */
+            --grid-color: rgba(0, 0, 0, 0.03);
+            --spotlight: radial-gradient(circle at 50% 0%, rgba(217, 119, 6, 0.05), transparent 70%);
+
+            --blur: blur(12px);
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            --skeleton-base: #e2e8f0;
+            --skeleton-highlight: #f8fafc;
+        }
+
+        /* DARK MODE */
+        [data-theme="dark"] {
+            --bg-body: #050505;
+            --bg-sidebar: rgba(10, 10, 10, 0.6);
+            --bg-card: #0f0f0f;
+            --bg-card-hover: #141414;
+            --bg-header: rgba(5, 5, 5, 0.6);
+
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --border-hover: rgba(255, 255, 255, 0.15);
+            --input-bg: rgba(255, 255, 255, 0.05);
+
+            --primary: #FFD700;
+            --primary-dim: rgba(255, 215, 0, 0.1);
+
+            --text-main: #ffffff;
+            --text-muted: #888888;
+
+            /* GRID BACKGROUND (Dark) */
+            --grid-color: rgba(255, 255, 255, 0.03);
+            --spotlight: radial-gradient(circle at 50% 0%, rgba(255, 215, 0, 0.08), transparent 70%);
+
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --skeleton-base: #111;
+            --skeleton-highlight: #222;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            outline: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            height: 100vh;
+            display: flex;
+            overflow: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
+
+            /* GRID TEXTURE */
+            background-image:
+                linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
+                linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
+            background-size: 40px 40px;
+            position: relative;
+        }
+
+        /* SPOTLIGHT EFFECT */
+        body::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background: var(--spotlight);
+            z-index: -1;
+        }
+
+        /* --- SIDEBAR --- */
+        aside {
+            width: var(--sidebar-width);
+            background: var(--bg-sidebar);
+            backdrop-filter: var(--blur);
+            border-right: 1px solid var(--border-subtle);
+            display: flex;
+            flex-direction: column;
+            padding: 30px 20px;
+            z-index: 100;
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease;
+            overflow-y: auto;
+            height: 100%;
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 800;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--text-main);
+            letter-spacing: -0.02em;
+            padding-left: 8px;
+        }
+
+        .logo i {
+            color: var(--bg-body);
+            background: var(--primary);
+            width: 34px;
+            height: 34px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .nav-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: 0.05em;
+            padding-left: 10px;
+            margin-top: 20px;
+        }
+
+        .nav-item {
+            padding: 12px 14px;
+            color: var(--text-muted);
+            cursor: pointer;
+            border-radius: 10px;
+            margin-bottom: 4px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            transition: var(--transition);
+            border: 1px solid transparent;
+        }
+
+        .nav-item:hover {
+            background: var(--bg-card-hover);
+            color: var(--text-main);
+        }
+
+        .nav-item.active {
+            background: var(--primary-dim);
+            color: var(--primary);
+            border-color: rgba(217, 119, 6, 0.1);
+        }
+
+        .nav-item i {
+            width: 20px;
+            text-align: center;
+        }
+
+        /* --- MAIN AREA --- */
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            width: 100%;
+            z-index: 10;
+        }
+
+        header {
+            padding: 20px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            background: var(--bg-header);
+            backdrop-filter: var(--blur);
+            border-bottom: 1px solid var(--border-subtle);
+            z-index: 50;
+            transition: border-color 0.3s ease, background-color 0.3s ease;
+        }
+
+        .menu-btn {
+            display: none;
+            font-size: 1.2rem;
+            color: var(--text-main);
+            cursor: pointer;
+        }
+
+        /* Premium Search */
+        .search-container {
+            flex: 1;
+            max-width: 500px;
+            position: relative;
+        }
+
+        .search-box {
+            width: 100%;
+            background: var(--input-bg);
+            border: 1px solid var(--border-subtle);
+            padding: 12px 20px 12px 45px;
+            border-radius: 12px;
+            color: var(--text-main);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+
+        .search-box:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px var(--primary-dim);
+            background: var(--bg-card);
+        }
+
+        .shortcut-hint {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.75rem;
+            background: var(--bg-card);
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: var(--text-muted);
+            border: 1px solid var(--border-subtle);
+        }
+
+        /* User / Theme Area */
+        .header-meta {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .theme-toggle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid var(--border-subtle);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: var(--text-muted);
+            transition: var(--transition);
+            background: var(--bg-card);
+        }
+
+        .theme-toggle:hover {
+            color: var(--text-main);
+            border-color: var(--border-hover);
+            transform: rotate(15deg);
+        }
+
+        .live-clock {
+            text-align: right;
+        }
+
+        .time {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--text-main);
+            font-variant-numeric: tabular-nums;
+        }
+
+        .date {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            background: var(--input-bg);
+            border-radius: 50%;
+            border: 1px solid var(--border-subtle);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-weight: 800;
+            font-size: 0.9rem;
+        }
+
+        /* --- GRID & CARDS --- */
+        .grid-container {
+            flex: 1;
+            overflow-y: auto;
+            padding: 40px;
+            scroll-behavior: smooth;
+        }
+
+        .section-header {
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .section-title {
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-line {
+            height: 1px;
+            flex: 1;
+            background: var(--border-subtle);
+            margin-left: 15px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            padding-bottom: 60px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            text-decoration: none;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            transition: var(--transition);
+            overflow: hidden;
+            animation: fadeUp 0.5s ease backwards;
+            /* Glassy feel inside card */
+            backdrop-filter: blur(5px);
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: var(--border-hover);
+            box-shadow: var(--shadow);
+        }
+
+        .icon-box {
+            width: 48px;
+            height: 48px;
+            background: var(--input-bg);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--text-main);
+            margin-bottom: 20px;
+            transition: var(--transition);
+            border: 1px solid var(--border-subtle);
+        }
+
+        .card:hover .icon-box {
+            color: var(--primary);
+            border-color: var(--primary);
+            background: var(--primary-dim);
+        }
+
+        .card-title {
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 8px;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card-desc {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            font-weight: 400;
+        }
+
+        /* Badges & Actions */
+        .fav-btn {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            z-index: 10;
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            opacity: 0;
+            transform: translateX(10px);
+        }
+
+        .card:hover .fav-btn {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .fav-btn:hover {
+            color: var(--primary);
+        }
+
+        .fav-btn.active {
+            opacity: 1;
+            color: var(--primary);
+            transform: translateX(0);
+        }
+
+        .badge {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            background: var(--primary-dim);
+            color: var(--primary);
+        }
+
+        /* --- SKELETON LOADING --- */
+        .skeleton {
+            background: var(--skeleton-base);
+            border-radius: var(--radius-lg);
+            height: 180px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--border-subtle);
+        }
+
+        .skeleton::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, transparent, var(--skeleton-highlight), transparent);
+            transform: translateX(-100%);
+            animation: shimmer 1.5s infinite;
+        }
+
+        /* --- TOAST NOTIFICATION --- */
+        #toast-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 200;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .toast {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-main);
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: var(--shadow);
+            animation: slideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            min-width: 250px;
+        }
+
+        .toast i {
+            color: var(--primary);
+        }
+
+        /* --- ANIMATIONS --- */
+        @keyframes shimmer {
+            100% {
+                transform: translateX(100%);
+            }
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* SCROLLBAR */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-subtle);
+            border-radius: 3px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--border-hover);
+        }
+
+        /* RESPONSIVE */
+        @media(max-width: 850px) {
+            aside {
+                position: fixed;
+                left: 0;
+                top: 0;
+                bottom: 0;
+                transform: translateX(-100%);
+                width: 80%;
+                box-shadow: 50px 0 50px rgba(0, 0, 0, 0.2);
+            }
+
+            aside.open {
+                transform: translateX(0);
+            }
+
+            #overlay {
+                position: fixed;
+                inset: 0;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 90;
+                display: none;
+                backdrop-filter: blur(4px);
+            }
+
+            #overlay.active {
+                display: block;
+            }
+
+            .menu-btn {
+                display: block;
+            }
+
+            .grid-container {
+                padding: 20px;
+            }
+
+            header {
+                padding: 15px 20px;
+            }
+
+            .header-meta {
+                display: none;
+            }
+
+            .theme-toggle {
+                display: flex;
+                margin-left: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="overlay" onclick="toggleMenu()"></div>
+    <div id="toast-container"></div>
+
+    <aside id="sidebar">
+        <div class="logo">
+            <i class="fa-solid fa-cube"></i> OmniTools
+        </div>
+
+        <div class="nav-item active" onclick="filter('all', this)"><i class="fa-solid fa-grid-2"></i> All Tools</div>
+        <div class="nav-item" onclick="filter('fav', this)"><i class="fa-solid fa-star"></i> Favorites</div>
+
+        <div class="nav-label">Tools</div>
+        <div class="nav-item" onclick="filter('image', this)"><i class="fa-solid fa-image"></i> Image Resizer</div>
+        <div class="nav-item" onclick="filter('signature', this)"><i class="fa-solid fa-signature"></i> Signature</div>
+        <div class="nav-item" onclick="filter('pdf', this)"><i class="fa-solid fa-file-pdf"></i> PDF Tools</div>
+        <div class="nav-item" onclick="filter('password', this)"><i class="fa-solid fa-shield-halved"></i> Password
+        </div>
+        <div class="nav-item" onclick="filter('converter', this)"><i class="fa-solid fa-file-image"></i> JPG → PDF</div>
+
+        <div class="nav-item" onclick="toggleMenu()"
+            style="margin-top:auto; color:#ef4444; border-top:1px solid var(--border-subtle); border-radius:0;">
+            <i class="fa-solid fa-power-off"></i> Close Menu
+        </div>
+    </aside>
+
+    <main>
+        <header>
+            <div class="menu-btn" onclick="toggleMenu()"><i class="fa-solid fa-bars"></i></div>
+
+            <div class="search-container">
+                <i class="fa-solid fa-search search-icon"></i>
+                <input type="text" class="search-box" id="search" placeholder="Type / to search tools..."
+                    onkeyup="searchTools()">
+                <div class="shortcut-hint">/</div>
+            </div>
+
+            <div class="header-meta">
+                <div class="theme-toggle" onclick="toggleTheme()" title="Switch Theme">
+                    <i id="theme-icon" class="fa-solid fa-moon"></i>
+                </div>
+
+                <div class="live-clock">
+                    <div class="time" id="clock-time">12:00</div>
+                    <div class="date" id="clock-date">Mon, 1 Jan</div>
+                </div>
+                <div class="avatar">OT</div>
+            </div>
+        </header>
+
+        <div class="grid-container">
+            <div id="intro-text-box" style="margin-bottom: 40px; animation: fadeUp 0.6s ease;">
+                <h2
+                    style="font-size: 1.8rem; font-weight: 800; margin-bottom: 10px; color: var(--text-main); letter-spacing: -0.02em;">
+                    <span id="greeting">Good Morning</span> — Your Free Toolkit is Ready.
+                </h2>
+                <p style="color: var(--text-muted); font-size: 1rem; max-width: 700px; line-height: 1.6;">
+                    <strong>OmniTools</strong> gives you 5 powerful, privacy-first utilities —
+                    resize images, compress PDFs, generate passwords, resize signatures, and convert JPG to PDF.
+                    Everything runs <strong>100% in your browser</strong>. No uploads, no accounts, no tracking.
+                </p>
+            </div>
+
+            <div id="recents-container"></div>
+
+            <div class="section-header">
+                <span class="section-title"><i class="fa-solid fa-layer-group"></i> All Applications</span>
+                <div class="section-line"></div>
+            </div>
+
+            <div class="grid" id="tools-grid">
+                <div class="skeleton"></div>
+                <div class="skeleton"></div>
+                <div class="skeleton"></div>
+                <div class="skeleton"></div>
+            </div>
+
+            <footer
+                style="margin-top: 60px; border-top: 1px solid var(--border-subtle); padding: 40px 0; text-align: center; color: var(--text-muted); font-size: 0.85rem;">
+                <p>&copy; 2026 OmniTools Inc. &bull; <a href="terms" style="color:inherit; text-decoration:none;">Terms
+                        of Service</a> &bull; <a href="privacy" style="color:inherit; text-decoration:none;">Privacy
+                        Policy</a></p>
+                <p style="margin-top:5px; font-size:0.75rem; opacity:0.7;">Designed for Developers, Students, and
+                    Privacy Advocates.</p>
+            </footer>
+        </div>
+    </main>
+
+    <script src="database.js"></script>
+
+    <script>
+        // --- 1. CORE VARIABLES ---
+        const grid = document.getElementById('tools-grid');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+        let toolsDB_Local = [];
+
+        // --- 2. THEME SYSTEM ---
+        function toggleTheme() {
+            const html = document.documentElement;
+            const current = html.getAttribute('data-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+            updateThemeIcon(next);
+        }
+
+        function updateThemeIcon(theme) {
+            const icon = document.getElementById('theme-icon');
+            if (theme === 'dark') {
+                icon.className = 'fa-solid fa-sun';
+            } else {
+                icon.className = 'fa-solid fa-moon';
+            }
+        }
+
+        // Initialize Theme
+        (function () {
+            const saved = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', saved);
+            updateThemeIcon(saved);
+        })();
+
+        // --- 3. CLOCK & GREETING ---
+        function updateClock() {
+            const now = new Date();
+            document.getElementById('clock-time').innerText = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            document.getElementById('clock-date').innerText = now.toLocaleDateString([], { weekday: 'short', day: 'numeric', month: 'short' });
+
+            const hr = now.getHours();
+            let greet = "Good Evening";
+            if (hr < 12) greet = "Good Morning";
+            else if (hr < 18) greet = "Good Afternoon";
+            document.getElementById('greeting').innerText = greet;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // --- 4. TOAST NOTIFICATIONS ---
+        function showToast(msg, icon = 'fa-check-circle') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.innerHTML = `<i class="fa-solid ${icon}"></i> ${msg}`;
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateY(10px)';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        // --- 5. DATA LOGIC (FAVORITES & RECENTS) ---
+        function getFavorites() { return JSON.parse(localStorage.getItem('omni_favorites')) || []; }
+
+        function toggleFav(e, url) {
+            e.preventDefault(); e.stopPropagation();
+            let favs = getFavorites();
+            const btn = e.currentTarget;
+
+            if (favs.includes(url)) {
+                favs = favs.filter(u => u !== url);
+                btn.classList.remove('active');
+                showToast('Removed from Favorites', 'fa-trash');
+            } else {
+                favs.push(url);
+                btn.classList.add('active');
+                showToast('Added to Favorites');
+            }
+            localStorage.setItem('omni_favorites', JSON.stringify(favs));
+
+            // Re-render if currently viewing favorites
+            if (document.querySelector('.nav-item.active').innerText.includes('Favorites')) render('fav');
+        }
+
+        function addToRecents(url) {
+            let recents = JSON.parse(localStorage.getItem('omni_recents')) || [];
+            recents = recents.filter(u => u !== url);
+            recents.unshift(url);
+            if (recents.length > 4) recents.pop();
+            localStorage.setItem('omni_recents', JSON.stringify(recents));
+        }
+
+        // --- 6. RENDER LOGIC ---
+        function renderRecents() {
+            const container = document.getElementById('recents-container');
+            const recents = JSON.parse(localStorage.getItem('omni_recents')) || [];
+            if (!toolsDB_Local.length || !recents.length) { container.innerHTML = ''; return; }
+
+            const recentTools = recents.map(url => toolsDB_Local.find(t => t.url === url)).filter(Boolean);
+            if (!recentTools.length) return;
+
+            let html = `
+                <div class="section-header" style="margin-top:20px;">
+                    <span class="section-title" style="color:var(--primary);"><i class="fa-solid fa-clock-rotate-left"></i> Recently Used</span>
+                    <div class="section-line" style="background:var(--primary-dim);"></div>
+                </div>
+                <div class="grid" style="margin-bottom:40px;">`;
+
+            recentTools.forEach((tool, index) => {
+                html += createCardHTML(tool, index * 50);
+            });
+            html += `</div>`;
+            container.innerHTML = html;
+        }
+
+        function createCardHTML(tool, delay) {
+            const favs = getFavorites();
+            const isFav = favs.includes(tool.url);
+            const badge = tool.tag ? `<span class="badge">${tool.tag}</span>` : "";
+
+            // NOTE: REMOVED .html extension for clean URLs
+            return `
+                <a href="${tool.url}" class="card" style="animation-delay: ${delay}ms" onclick="addToRecents('${tool.url}')">
+                    ${badge}
+                    <div class="fav-btn ${isFav ? 'active' : ''}" onclick="toggleFav(event, '${tool.url}')">
+                        <i class="${isFav ? 'fa-solid' : 'fa-regular'} fa-star"></i>
+                    </div>
+                    <div class="icon-box"><i class="fa-solid ${tool.icon}"></i></div>
+                    <div class="card-title">${tool.name}</div>
+                    <div class="card-desc">${tool.desc}</div>
+                </a>
+            `;
+        }
+
+        function render(cat) {
+            if (window.innerWidth < 850) { sidebar.classList.remove('open'); overlay.classList.remove('active'); }
+
+            const recentsDiv = document.getElementById('recents-container');
+            if (cat === 'all') renderRecents(); else recentsDiv.innerHTML = '';
+
+            let filtered = [];
+            if (cat === 'all') filtered = toolsDB_Local;
+            else if (cat === 'fav') filtered = toolsDB_Local.filter(t => getFavorites().includes(t.url));
+            else filtered = toolsDB_Local.filter(t => t.cat === cat);
+
+            grid.innerHTML = "";
+            if (filtered.length === 0) {
+                grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:60px; color:var(--text-muted);">
+                    <i class="fa-solid fa-folder-open" style="font-size:2rem; margin-bottom:15px; opacity:0.5;"></i><br>No tools found.</div>`;
+                return;
+            }
+
+            filtered.forEach((tool, index) => {
+                grid.innerHTML += createCardHTML(tool, index * 30);
+            });
+        }
+
+        function filter(cat, btn) {
+            document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
+            if (btn) btn.classList.add('active');
+            localStorage.setItem('omni_last_category', cat);
+            render(cat);
+        }
+
+        function searchTools() {
+            const q = document.getElementById('search').value.toLowerCase();
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(c => {
+                const text = c.innerText.toLowerCase();
+                c.style.display = text.includes(q) ? 'flex' : 'none';
+            });
+        }
+
+        function toggleMenu() { sidebar.classList.toggle('open'); overlay.classList.toggle('active'); }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === '/' && document.activeElement !== document.getElementById('search')) {
+                e.preventDefault(); document.getElementById('search').focus();
+            }
+        });
+
+        // --- 8. INITIALIZATION ---
+        window.onload = function () {
+            setTimeout(() => {
+                if (typeof toolsDB !== 'undefined') {
+                    toolsDB_Local = toolsDB;
+                    const savedCat = localStorage.getItem('omni_last_category') || 'all';
+
+                    const activeBtn = document.querySelector(`.nav-item[onclick*="'${savedCat}'"]`) || document.querySelector('.nav-item');
+
+                    filter(savedCat, activeBtn);
+                } else {
+                    grid.innerHTML = `<div style="color:red; padding:20px;">Error: database.js not loaded.</div>`;
+                }
+            }, 300);
+        };
+    </script>
+</body>
+
+</html>

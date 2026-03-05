@@ -1,0 +1,17 @@
+[build]
+  publish = "."
+
+# 1. FORCE REMOVAL OF .HTML (The Magic Rule)
+# If user visits /contact.html, browser changes to /contact
+[[redirects]]
+  from = "/*.html"
+  to = "/:splat"
+  status = 301
+  force = true
+
+# 2. SERVE THE FILE INTERNALLY
+# If user visits /contact, Netlify silently serves contact.html
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 404

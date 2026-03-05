@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <title>Terms of Service - OmniTools</title>
+    <meta name="description" content="Terms of Service for OmniTools. Read our usage guidelines, disclaimers, and limitations of liability regarding our online utilities.">
+    <meta name="robots" content="noindex, follow"> <link rel="canonical" href="https://omnitools.in/terms.html">
+    <meta name="theme-color" content="#09090b">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Terms of Service",
+      "description": "Legal terms and conditions for using OmniTools.",
+      "url": "https://omnitools.in/terms.html"
+    }
+    </script>
+
+    <style>
+        /* --- THEME SYSTEM (Synced) --- */
+        :root { 
+            /* LIGHT MODE */
+            --bg-body: #ffffff;        
+            --bg-card: #ffffff;        
+            --bg-hover: #f8fafc;
+            
+            --primary: #d97706; 
+            --primary-dim: rgba(217, 119, 6, 0.1); 
+            
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border: #e2e8f0;  
+            
+            --radius: 16px;
+            --shadow: 0 10px 30px -10px rgba(0,0,0,0.1);
+            
+            /* GRID BACKGROUND (Light) */
+            --grid-color: rgba(0, 0, 0, 0.03); 
+            --spotlight: radial-gradient(circle at 50% 0%, rgba(217, 119, 6, 0.05), transparent 70%);
+        }
+
+        /* DARK MODE */
+        [data-theme="dark"] {
+            --bg-body: #050505;        
+            --bg-card: #0f0f0f;        
+            --bg-hover: #141414;
+
+            --primary: #FFD700;        
+            --primary-dim: rgba(255, 215, 0, 0.1); 
+            
+            --text-main: #ffffff;
+            --text-muted: #888888;
+            --border: rgba(255, 255, 255, 0.08);  
+            
+            --shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+            
+            /* GRID BACKGROUND (Dark) */
+            --grid-color: rgba(255, 255, 255, 0.03); 
+            --spotlight: radial-gradient(circle at 50% 0%, rgba(255, 215, 0, 0.08), transparent 70%);
+        }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
+        
+        body { 
+            background-color: var(--bg-body); color: var(--text-main);
+            min-height: 100vh; display: flex; flex-direction: column; align-items: center;
+            
+            /* GRID LINING BACKGROUND */
+            background-image: 
+                linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
+                linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
+            background-size: 40px 40px;
+            padding: 20px;
+            position: relative;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        body::before {
+            content: ''; position: absolute; inset: 0; pointer-events: none;
+            background: var(--spotlight); z-index: -1;
+        }
+
+        .container { max-width: 900px; width: 100%; position: relative; z-index: 1; }
+        
+        /* Nav Header */
+        .nav-header { 
+            display: flex; align-items: center; justify-content: space-between; 
+            margin-bottom: 40px; font-size: 0.9rem; 
+        }
+        .nav-left { display: flex; align-items: center; gap: 10px; }
+        .nav-link { color: var(--text-muted); text-decoration: none; transition: 0.2s; display: flex; align-items: center; gap: 6px; font-weight: 500; }
+        .nav-link:hover { color: var(--primary); }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--border);
+            display: flex; align-items: center; justify-content: center; cursor: pointer;
+            color: var(--text-muted); transition: 0.2s; background: var(--bg-card);
+        }
+        .theme-toggle:hover { color: var(--text-main); border-color: var(--primary); transform: rotate(15deg); }
+
+        /* LEGAL CARD */
+        .legal-card { 
+            background: var(--bg-card); 
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border); 
+            border-radius: var(--radius); padding: 50px; 
+            box-shadow: var(--shadow); margin-bottom: 60px; 
+            text-align: left;
+        }
+
+        /* Typography */
+        h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 10px; letter-spacing: -0.03em; color: var(--text-main); }
+        .last-updated { font-size: 0.85rem; color: var(--text-muted); display: block; margin-bottom: 40px; font-weight: 500; }
+        
+        h2 { 
+            font-size: 1.4rem; color: var(--text-main); margin-top: 40px; margin-bottom: 15px; 
+            border-left: 4px solid var(--primary); padding-left: 15px; 
+        }
+        
+        p { color: var(--text-muted); line-height: 1.8; margin-bottom: 20px; font-size: 1rem; }
+        
+        /* Highlight Box */
+        .highlight-box {
+            background: var(--primary-dim); border: 1px solid var(--primary);
+            padding: 20px; border-radius: 12px; margin: 30px 0;
+        }
+        .highlight-box p { color: var(--text-main); margin: 0; font-weight: 500; }
+        .highlight-box strong { color: var(--primary); }
+
+        a { color: var(--primary); text-decoration: none; font-weight: 500; }
+        a:hover { text-decoration: underline; }
+
+        @media(max-width: 600px) {
+            .legal-card { padding: 25px; }
+            h1 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    
+    <div class="nav-header">
+        <div class="nav-left">
+            <a href="index.html" class="nav-link"><i class="fa-solid fa-chevron-left"></i> Back to Home</a>
+        </div>
+        <div class="theme-toggle" onclick="toggleTheme()" title="Switch Theme">
+            <i id="theme-icon" class="fa-solid fa-moon"></i>
+        </div>
+    </div>
+
+    <div class="legal-card">
+        <h1>Terms of Service</h1>
+        <span class="last-updated">Effective Date: February 2026</span>
+
+        <p>Welcome to <strong>OmniTools</strong>! By accessing our website at <a href="https://omnitools.in">https://omnitools.in</a>, you agree to be bound by these Terms of Service, all applicable laws and regulations, and agree that you are responsible for compliance with any applicable local laws.</p>
+
+        <h2>1. Use License</h2>
+        <p>Permission is granted to use the tools and software available on OmniTools's website for personal, non-commercial, and commercial purposes (e.g., resizing photos for applications). This is the grant of a license, not a transfer of title.</p>
+        <p>You may not:</p>
+        <ul style="color:var(--text-muted); padding-left:20px; margin-bottom:20px;">
+            <li>Attempt to decompile or reverse engineer any software contained on OmniTools's website;</li>
+            <li>Remove any copyright or other proprietary notations from the materials; or</li>
+            <li>Use the website in any manner that could damage, disable, overburden, or impair the site.</li>
+        </ul>
+
+        <h2>2. Disclaimer (Critical)</h2>
+        <div class="highlight-box">
+            <p><strong><i class="fa-solid fa-triangle-exclamation"></i> Important Notice:</strong></p>
+            <p style="margin-top:10px; font-weight:400;">
+                The materials and tools on OmniTools are provided on an 'as is' basis. While we strive for 100% accuracy in our calculators, converters, and compression tools, <strong>OmniTools makes no warranties</strong>, expressed or implied, regarding the accuracy of results.
+                <br><br>
+                Users should verify critical data (especially financial or medical metrics) with professional advice before making decisions based on our tools.
+            </p>
+        </div>
+
+        <h2>3. Limitations</h2>
+        <p>In no event shall OmniTools or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use the materials on OmniTools's website, even if OmniTools or a representative has been notified orally or in writing of the possibility of such damage.</p>
+
+        <h2>4. Data Privacy & Processing</h2>
+        <p>We prioritize your privacy. As outlined in our Privacy Policy, <strong>most of our tools operate Client-Side</strong>. This means your files (images, PDFs) are processed within your own browser and are not uploaded to our servers unless explicitly stated otherwise. However, users understand that the security of their device and browser is their own responsibility.</p>
+
+        <h2>5. Links</h2>
+        <p>OmniTools has not reviewed all of the sites linked to its website and is not responsible for the contents of any such linked site. The inclusion of any link does not imply endorsement by OmniTools of the site. Use of any such linked website is at the user's own risk.</p>
+
+        <h2>6. Modifications</h2>
+        <p>OmniTools may revise these terms of service for its website at any time without notice. By using this website, you are agreeing to be bound by the then current version of these terms of service.</p>
+
+        <h2>7. Contact Us</h2>
+        <p>If you have any questions about these Terms, please contact us via email:</p>
+        <p><strong><i class="fa-solid fa-envelope"></i> Email:</strong> <a href="mailto:somnitools@gmail.com">somnitools@gmail.com</a></p>
+    </div>
+
+    <footer style="text-align: center; color: var(--text-muted); font-size: 0.8rem; padding-bottom: 40px;">
+        &copy; 2026 OmniTools Inc. • All Rights Reserved.
+    </footer>
+
+</div>
+
+<script>
+    function toggleTheme() {
+        const html = document.documentElement;
+        const current = html.getAttribute('data-theme');
+        const next = current === 'dark' ? 'light' : 'dark';
+        html.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+        updateThemeIcon(next);
+    }
+
+    function updateThemeIcon(theme) {
+        const icon = document.getElementById('theme-icon');
+        if(theme === 'dark') {
+            icon.className = 'fa-solid fa-sun';
+        } else {
+            icon.className = 'fa-solid fa-moon';
+        }
+    }
+
+    (function() {
+        const saved = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', saved);
+        document.addEventListener("DOMContentLoaded", function() {
+            updateThemeIcon(saved);
+        });
+    })();
+</script>
+
+</body>
+</html>
