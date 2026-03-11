@@ -79,7 +79,7 @@ export default function Home() {
     >
       <Helmet title={'OmniTools.in - Free Online Productivity Tools'} />
       
-      {/* Hero Section */}
+      {/* 1. Hero Section */}
       <Box pt={{ xs: 4, md: 8 }} sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
         <Container maxWidth="lg">
           <Hero />
@@ -87,21 +87,8 @@ export default function Home() {
       </Box>
 
       <Container maxWidth="lg" sx={{ py: 8 }}>
-        {/* Statistics Section */}
-        <Grid container spacing={3} sx={{ mb: { xs: 6, md: 10 } }}>
-          <Grid item xs={12} sm={4}>
-            <StatItem icon="heroicons:bolt" label="Active Online Tools" value="111+" />
-          </Grid>
-          <Grid item xs={12} sm={4}>
-            <StatItem icon="heroicons:shield-check" label="User Data Privacy" value="100%" />
-          </Grid>
-          <Grid item xs={12} sm={4}>
-            <StatItem icon="heroicons:currency-dollar" label="Free Forever" value="$0" />
-          </Grid>
-        </Grid>
-
-        {/* Filter Section */}
-        <Box mb={8} display="flex" flexDirection="column" alignItems="center">
+        {/* 2. Filter Section */}
+        <Box mb={10} display="flex" flexDirection="column" alignItems="center">
           <Typography variant="h4" fontWeight={800} gutterBottom textAlign="center" sx={{ mb: 4 }}>
             Find Your Tool
           </Typography>
@@ -111,7 +98,7 @@ export default function Home() {
           />
         </Box>
 
-        {/* Trending Now Section */}
+        {/* 3. Trending Now Section */}
         <Box sx={{ mb: 10 }}>
           <Stack direction="row" alignItems="center" spacing={1} mb={4} justifyContent="center">
             <Icon icon="heroicons:fire" fontSize={28} style={{ color: '#f87171' }} />
@@ -156,13 +143,34 @@ export default function Home() {
           </Grid>
         </Box>
 
-        {/* How it Works / Process Section */}
+        {/* 4. Categories Section */}
+        <Box sx={{ mb: 12 }}>
+          <Typography variant="h4" fontWeight={800} textAlign="center" sx={{ mb: 6 }}>
+            Browse by Category
+          </Typography>
+          <Categories />
+        </Box>
+
+        {/* 5. Statistics Section */}
+        <Grid container spacing={3} sx={{ mb: 12 }}>
+          <Grid item xs={12} sm={4}>
+            <StatItem icon="heroicons:bolt" label="Active Online Tools" value="111+" />
+          </Grid>
+          <Grid item xs={12} sm={4}>
+            <StatItem icon="heroicons:shield-check" label="User Data Privacy" value="100%" />
+          </Grid>
+          <Grid item xs={12} sm={4}>
+            <StatItem icon="heroicons:currency-dollar" label="Free Forever" value="$0" />
+          </Grid>
+        </Grid>
+
+        {/* 6. How it Works & Privacy */}
         <Box sx={{ mb: 12, textAlign: 'center' }}>
           <Typography variant="overline" color="primary" fontWeight={800} sx={{ letterSpacing: 2 }}>
             THE PROCESS
           </Typography>
           <Typography variant="h3" fontWeight={900} mb={6}>Simple. Fast. Private.</Typography>
-          <Grid container spacing={4}>
+          <Grid container spacing={4} sx={{ mb: 8 }}>
             {[
               { step: '01', title: 'Choose Your Tool', desc: 'Select from 111+ productivity utilities.', icon: 'heroicons:cursor-arrow-rays' },
               { step: '02', title: 'Process Locally', desc: 'Your data stays in your browser. Maximum privacy.', icon: 'heroicons:cpu-chip' },
@@ -194,131 +202,102 @@ export default function Home() {
               </Grid>
             ))}
           </Grid>
-        </Box>
 
-        {/* Categories Section */}
-        <Box display="flex" justifyContent="center" mb={{ xs: 8, md: 10 }}>
-          <Categories />
-        </Box>
-
-        {/* Privacy Shield Section */}
-        <Box 
-          sx={{ 
-            mb: 12, 
-            p: { xs: 4, md: 8 }, 
-            borderRadius: 8,
-            background: theme.palette.mode === 'dark'
-              ? 'linear-gradient(135deg, rgba(79, 70, 229, 0.1) 0%, rgba(168, 85, 247, 0.05) 100%)'
-              : 'linear-gradient(135deg, rgba(79, 70, 229, 0.05) 0%, rgba(168, 85, 247, 0.02) 100%)',
-            border: '1px solid rgba(79, 70, 229, 0.2)',
-            display: 'flex',
-            flexDirection: { xs: 'column', md: 'row' },
-            alignItems: 'center',
-            gap: 6,
-            overflow: 'hidden',
-            position: 'relative'
-          }}
-        >
-          <Box sx={{ position: 'relative' }}>
-            <Box
-              sx={{
-                width: 120,
-                height: 120,
-                borderRadius: '50%',
-                background: 'rgba(79, 70, 229, 0.2)',
-                filter: 'blur(40px)',
-                position: 'absolute',
-                top: '50%',
-                left: '50%',
-                transform: 'translate(-50%, -50%)'
-              }}
-            />
-            <Icon 
-              icon="heroicons:shield-check" 
-              fontSize={100} 
-              style={{ color: '#818cf8', position: 'relative', zIndex: 1 }} 
-            />
-          </Box>
-          <Box sx={{ zIndex: 1 }}>
-            <Typography variant="h3" fontWeight={900} mb={2} sx={{ fontSize: { xs: '2rem', md: '2.5rem' } }}>
-              Your Privacy is Our Priority
-            </Typography>
-            <Typography variant="body1" color="text.secondary" sx={{ fontSize: '1.2rem', maxWidth: '700px', mb: 4 }}>
-              OmniTools.in is built to be the safest tool suite on the web. Most of our tools process your data <strong>entirely in your browser</strong>. This means your files, text, and data never even reach our servers.
-            </Typography>
-            <Stack direction="row" spacing={3}>
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                <Icon icon="heroicons:check-circle" style={{ color: '#10b981' }} />
-                <Typography fontWeight={700}>100% Local Processing</Typography>
-              </Box>
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                <Icon icon="heroicons:check-circle" style={{ color: '#10b981' }} />
-                <Typography fontWeight={700}>No Data Storage</Typography>
-              </Box>
-            </Stack>
+          <Box 
+            sx={{ 
+              p: { xs: 4, md: 8 }, 
+              borderRadius: 8,
+              background: theme.palette.mode === 'dark'
+                ? 'linear-gradient(135deg, rgba(79, 70, 229, 0.1) 0%, rgba(168, 85, 247, 0.05) 100%)'
+                : 'linear-gradient(135deg, rgba(79, 70, 229, 0.05) 0%, rgba(168, 85, 247, 0.02) 100%)',
+              border: '1px solid rgba(79, 70, 229, 0.2)',
+              display: 'flex',
+              flexDirection: { xs: 'column', md: 'row' },
+              alignItems: 'center',
+              gap: 6,
+              overflow: 'hidden',
+              position: 'relative',
+              textAlign: 'left'
+            }}
+          >
+            <Box sx={{ position: 'relative' }}>
+              <Icon 
+                icon="heroicons:shield-check" 
+                fontSize={100} 
+                style={{ color: '#818cf8', position: 'relative', zIndex: 1 }} 
+              />
+            </Box>
+            <Box sx={{ zIndex: 1 }}>
+              <Typography variant="h3" fontWeight={900} mb={2} sx={{ fontSize: { xs: '2rem', md: '2.5rem' } }}>
+                Your Privacy is Our Priority
+              </Typography>
+              <Typography variant="body1" color="text.secondary" sx={{ fontSize: '1.2rem', maxWidth: '700px', mb: 4 }}>
+                OmniTools.in is built to be the safest tool suite on the web. Most of our tools process your data <strong>entirely in your browser</strong>.
+              </Typography>
+              <Stack direction="row" spacing={3}>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                  <Icon icon="heroicons:check-circle" style={{ color: '#10b981' }} />
+                  <Typography fontWeight={700}>100% Local</Typography>
+                </Box>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                  <Icon icon="heroicons:check-circle" style={{ color: '#10b981' }} />
+                  <Typography fontWeight={700}>No Data Storage</Typography>
+                </Box>
+              </Stack>
+            </Box>
           </Box>
         </Box>
 
-        {/* Why Choose Us Section */}
-        <Box sx={{ mb: { xs: 10, md: 15 } }}>
-          <Typography variant="h3" fontWeight={900} textAlign="center" gutterBottom sx={{ mb: { xs: 4, md: 8 }, fontSize: { xs: '2rem', md: '3rem' } }}>
-            Why OmniTools.in?
-          </Typography>
-          <Grid container spacing={6}>
+        {/* 7. Why Choose & SEO Content */}
+        <Box sx={{ mb: 10 }}>
+           <Grid container spacing={6} sx={{ mb: 10 }}>
             <Grid item xs={12} md={4}>
               <FeatureItem
                 icon="heroicons:sparkles"
                 title="Super Fast"
-                description="Our tools are highly optimized to give you results in seconds, not minutes."
+                description="Our tools are highly optimized to give you results in seconds."
               />
             </Grid>
             <Grid item xs={12} md={4}>
               <FeatureItem
                 icon="heroicons:lock-closed"
-                title="Server-Side Privacy"
-                description="We prioritize your privacy. Most of our tools process data locally in your browser."
+                title="Private"
+                description="Most of our tools process data locally in your browser."
               />
             </Grid>
             <Grid item xs={12} md={4}>
               <FeatureItem
                 icon="heroicons:device-phone-mobile"
                 title="Mobile Friendly"
-                description="Access all 111+ tools on any device, anywhere. Optimized for mobile and desktop."
+                description="Access all 111+ tools on any device, anywhere."
               />
             </Grid>
           </Grid>
-        </Box>
 
-        {/* Rich Content / SEO Section */}
-        <Paper
-          elevation={0}
-          sx={{
-            p: { xs: 4, md: 8 },
-            background: theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.02)' : 'rgba(0, 0, 0, 0.01)',
-            borderRadius: 8,
-            border: '1px solid',
-            borderColor: 'divider',
-          }}
-        >
-          <Typography variant="h4" fontWeight={900} gutterBottom color="primary.main">
-            Discover the Power of OmniTools.in
-          </Typography>
-          <Typography variant="body1" paragraph color="text.secondary" sx={{ fontSize: '1.1rem', lineHeight: 1.8 }}>
-            OmniTools.in is your ultimate destination for free, high-quality online tools. With a library of over 111+ diverse tools ranging from <strong>Image Converters</strong> and <strong>PDF Editors</strong> to <strong>Text Manipulators</strong> and <strong>Unit Converters</strong>, we aim to simplify your digital workflow. 
-          </Typography>
-          <Typography variant="h5" fontWeight={700} sx={{ mt: 4, mb: 2 }}>
-            Unmatched Privacy and Security
-          </Typography>
-          <Typography variant="body1" paragraph color="text.secondary" sx={{ fontSize: '1.1rem', lineHeight: 1.8 }}>
-            Unlike other platforms, OmniTools.in is built with a privacy-first mindset. We understand that your data is sensitive. That's why many of our tools are designed to work entirely within your browser, meaning your files never leave your computer. For tools that require server processing, we ensure secure data handling and immediate deletion after the task is complete.
-          </Typography>
-          <Typography variant="h5" fontWeight={700} sx={{ mt: 4, mb: 2 }}>
-            Completely Free, No Registration Required
-          </Typography>
-          <Typography variant="body1" paragraph color="text.secondary" sx={{ fontSize: '1.1rem', lineHeight: 1.8 }}>
-            We believe that essential productivity tools should be accessible to everyone. Every tool on our platform is available for free, without the need for hidden subscriptions or complex sign-up processes. Just visit OmniTools.in and start working immediately.
-          </Typography>
-        </Paper>
+          <Paper
+            elevation={0}
+            sx={{
+              p: { xs: 4, md: 8 },
+              background: theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.02)' : 'rgba(0, 0, 0, 0.01)',
+              borderRadius: 8,
+              border: '1px solid',
+              borderColor: 'divider',
+            }}
+          >
+            <Typography variant="h4" fontWeight={900} gutterBottom color="primary.main">
+              Discover OmniTools.in
+            </Typography>
+            <Typography variant="body1" paragraph color="text.secondary" sx={{ fontSize: '1.1rem', lineHeight: 1.8 }}>
+              OmniTools.in is your destination for free, high-quality online tools. From <strong>Image Converters</strong> to <strong>PDF Editors</strong>, we simplify your digital workflow.
+            </Typography>
+            <Typography variant="h5" fontWeight={700} sx={{ mt: 4, mb: 2 }}>
+              Unmatched Privacy
+            </Typography>
+            <Typography variant="body1" paragraph color="text.secondary" sx={{ fontSize: '1.1rem', lineHeight: 1.8 }}>
+              Many of our tools work entirely within your browser, meaning your files never leave your computer.
+            </Typography>
+          </Paper>
+        </Box>
       </Container>
     </Box>
   );

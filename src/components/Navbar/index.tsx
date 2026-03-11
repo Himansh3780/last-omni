@@ -132,85 +132,32 @@ const Navbar: React.FC<NavbarProps> = ({
         }}
       >
         <Link to="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center' }}>
-          <Box
+          <Typography
+            variant="h4"
             sx={{
+              fontWeight: 900,
+              color: theme.palette.mode === 'dark' ? '#fff' : '#0f172a',
+              letterSpacing: '-0.04em',
+              fontSize: { xs: '1.5rem', md: '1.8rem' },
+              fontFamily: '"Inter", sans-serif',
               display: 'flex',
-              alignItems: 'baseline',
-              cursor: 'pointer',
-              position: 'relative',
-              '&:hover .logo-bg': { opacity: 1, transform: 'scale(1.1)' },
-              '&:hover .logo-dot': { transform: 'scale(1.5)', backgroundColor: theme.palette.secondary.main }
+              alignItems: 'center'
             }}
           >
+            Omni
             <Box
-              className="logo-bg"
-              sx={{
-                position: 'absolute',
-                top: -8,
-                left: -12,
-                right: -12,
-                bottom: -8,
-                borderRadius: '12px',
-                background: theme.palette.mode === 'dark' ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.03)',
-                opacity: 0,
-                transition: 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
-                zIndex: -1
-              }}
-            />
-            <Typography
-              variant="h4"
-              sx={{
-                fontWeight: 950,
-                color: theme.palette.mode === 'dark' ? '#fff' : '#0f172a',
-                letterSpacing: '-0.06em',
-                fontSize: { xs: '1.6rem', md: '2rem' },
-                fontFamily: '"Inter", sans-serif'
-              }}
-            >
-              Omni
-            </Typography>
-            <Typography
-              variant="h4"
+              component="span"
               sx={{
                 fontWeight: 200,
                 background: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.secondary.main} 100%)`,
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
-                letterSpacing: '-0.03em',
-                fontSize: { xs: '1.6rem', md: '2rem' },
-                fontFamily: '"Outfit", sans-serif',
                 ml: 0.5
               }}
             >
               Tools
-            </Typography>
-            <Box
-              className="logo-dot"
-              sx={{
-                width: 7,
-                height: 7,
-                borderRadius: '2px', // Squared dot for a tech look
-                background: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.secondary.main} 100%)`,
-                ml: 0.8,
-                mb: 0.5,
-                transform: 'rotate(45deg)', // Diamond shape
-                transition: 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)'
-              }}
-            />
-            <Typography
-              variant="caption"
-              sx={{
-                fontWeight: 600,
-                color: 'text.secondary',
-                fontSize: '0.8rem',
-                ml: 0.5,
-                opacity: 0.6,
-                letterSpacing: '0.1em'
-              }}
-            >
-              .IN
-            </Typography>
-          </Box>
+            </Box>
+          </Typography>
         </Link>
         {isMobile ? (
           <>
